@@ -1,0 +1,75 @@
+# Specify the Docker Compose file version (3.8 is widely supported and standard)
+version: '3.8'
+
+# Define the services (containers) that make up our application
+services:
+  # The database service
+  db:
+    # Use the official PostgreSQL version 18 image (as you requested)
+    # If version 18 doesn't pull, you can change this to "postgres:latest"
+    image: postgres:18
+    # Keep the container running and restart it automatically if it crashes
+    restart: always
+    # Set the environment variables for PostgreSQL to configure the user, password, and DB
+    environment:
+      # The database user name (matches the one in your .env)
+      POSTGRES_USER: postgres
+      # The database password (matches the one in your .env)
+      POSTGRES_PASSWORD: RiywSuPasS4252_
+      # The default database to create on startup
+      POSTGRES_DB: postgres
+    # Map port 5432 on your host machine to port 5432 in the container
+    ports:
+      - "5432:5432"
+    # Create a volume to persist database data even if the container is removed
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+  # The backend service (NestJS + Prisma)
+  backend:
+    # Build the Docker image using the Dockerfile in the nest-prisma directory
+    build:
+      # The context is the directory where the Dockerfile is located
+      context: ./nest-prisma
+      # Specify the name of the Dockerfile
+      dockerfile: Dockerfile
+    # Expose port 3001 on the host machine and map it to 3001 in the container
+    ports:
+      - "3001:3001"
+    # Set the environment variables for the backend
+    environment:
+      # Use port 3001 to avoid conflicts with Next.js which defaults to 3000
+      PORT: 3001
+      # The connection string for Prisma to connect to the db service
+      # We use "db" as the host, which resolves to the db service in the docker network
+      DATABASE_URL: "postgres://postgres:RiywSuPasS4252_@db:5432/postgres"
+    # Override the default command to run prisma migrate deploy before starting the server
+    # This automatically updates the database schema to match your Prisma migrations
+    command: sh -c "npx prisma migrate deploy && npm run start:prod"
+    # Ensure the db service starts before the backend service
+    depends_on:
+      - db
+
+  # The frontend service (Next.js)
+  frontend:
+    # Build the Docker image using the Dockerfile in the my-app directory
+    build:
+      # The context is the directory where the Dockerfile is located
+      context: ./my-app
+      # Specify the name of the Dockerfile
+      dockerfile: Dockerfile
+    # Expose port 3000 on the host machine and map it to 3000 in the container
+    ports:
+      - "3000:3000"
+    # Set environment variables for the frontend
+    environment:
+      # Base URL for API calls to the backend from the client-side
+      NEXT_PUBLIC_API_URL: "http://localhost:3001"
+    # Ensure the backend service starts before the frontend service
+    depends_on:
+      - backend
+
+# Define named volumes to be used by the services
+volumes:
+  # The named volume for PostgreSQL data persistence
+  postgres_data:
