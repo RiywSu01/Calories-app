@@ -8,8 +8,9 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/consumed_foods.js'
-export type * from './models/daily_log.js'
-export type * from './models/foods.js'
 export type * from './models/users.js'
+export type * from './models/user_profiles.js'
+export type * from './models/daily_logs.js'
+export type * from './models/foods.js'
+export type * from './models/consumed_foods.js'
 export type * from './commonInputTypes.js'

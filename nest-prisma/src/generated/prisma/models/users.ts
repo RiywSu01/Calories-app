@@ -25,41 +25,59 @@ export type AggregateUsers = {
 }
 
 export type UsersMinAggregateOutputType = {
-  id: string | null
+  user_id: string | null
+  email: string | null
   username: string | null
-  createat: Date | null
+  role: $Enums.user_role | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type UsersMaxAggregateOutputType = {
-  id: string | null
+  user_id: string | null
+  email: string | null
   username: string | null
-  createat: Date | null
+  role: $Enums.user_role | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type UsersCountAggregateOutputType = {
-  id: number
+  user_id: number
+  email: number
   username: number
-  createat: number
+  role: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
 
 export type UsersMinAggregateInputType = {
-  id?: true
+  user_id?: true
+  email?: true
   username?: true
-  createat?: true
+  role?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type UsersMaxAggregateInputType = {
-  id?: true
+  user_id?: true
+  email?: true
   username?: true
-  createat?: true
+  role?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type UsersCountAggregateInputType = {
-  id?: true
+  user_id?: true
+  email?: true
   username?: true
-  createat?: true
+  role?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -136,9 +154,12 @@ export type usersGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 export type UsersGroupByOutputType = {
-  id: string
+  user_id: string
+  email: string
   username: string
-  createat: Date | null
+  role: $Enums.user_role | null
+  created_at: Date | null
+  updated_at: Date | null
   _count: UsersCountAggregateOutputType | null
   _min: UsersMinAggregateOutputType | null
   _max: UsersMaxAggregateOutputType | null
@@ -163,33 +184,48 @@ export type usersWhereInput = {
   AND?: Prisma.usersWhereInput | Prisma.usersWhereInput[]
   OR?: Prisma.usersWhereInput[]
   NOT?: Prisma.usersWhereInput | Prisma.usersWhereInput[]
-  id?: Prisma.StringFilter<"users"> | string
+  user_id?: Prisma.UuidFilter<"users"> | string
+  email?: Prisma.StringFilter<"users"> | string
   username?: Prisma.StringFilter<"users"> | string
-  createat?: Prisma.DateTimeNullableFilter<"users"> | Date | string | null
-  daily_log?: Prisma.Daily_logListRelationFilter
+  role?: Prisma.Enumuser_roleNullableFilter<"users"> | $Enums.user_role | null
+  created_at?: Prisma.DateTimeNullableFilter<"users"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableFilter<"users"> | Date | string | null
+  user_profiles?: Prisma.XOR<Prisma.User_profilesNullableScalarRelationFilter, Prisma.user_profilesWhereInput> | null
+  daily_logs?: Prisma.Daily_logsListRelationFilter
 }
 
 export type usersOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  createat?: Prisma.SortOrderInput | Prisma.SortOrder
-  daily_log?: Prisma.daily_logOrderByRelationAggregateInput
+  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  user_profiles?: Prisma.user_profilesOrderByWithRelationInput
+  daily_logs?: Prisma.daily_logsOrderByRelationAggregateInput
 }
 
 export type usersWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  user_id?: string
+  email?: string
   AND?: Prisma.usersWhereInput | Prisma.usersWhereInput[]
   OR?: Prisma.usersWhereInput[]
   NOT?: Prisma.usersWhereInput | Prisma.usersWhereInput[]
   username?: Prisma.StringFilter<"users"> | string
-  createat?: Prisma.DateTimeNullableFilter<"users"> | Date | string | null
-  daily_log?: Prisma.Daily_logListRelationFilter
-}, "id">
+  role?: Prisma.Enumuser_roleNullableFilter<"users"> | $Enums.user_role | null
+  created_at?: Prisma.DateTimeNullableFilter<"users"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableFilter<"users"> | Date | string | null
+  user_profiles?: Prisma.XOR<Prisma.User_profilesNullableScalarRelationFilter, Prisma.user_profilesWhereInput> | null
+  daily_logs?: Prisma.Daily_logsListRelationFilter
+}, "user_id" | "email">
 
 export type usersOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  email?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  createat?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.usersCountOrderByAggregateInput
   _max?: Prisma.usersMaxOrderByAggregateInput
   _min?: Prisma.usersMinOrderByAggregateInput
@@ -199,55 +235,110 @@ export type usersScalarWhereWithAggregatesInput = {
   AND?: Prisma.usersScalarWhereWithAggregatesInput | Prisma.usersScalarWhereWithAggregatesInput[]
   OR?: Prisma.usersScalarWhereWithAggregatesInput[]
   NOT?: Prisma.usersScalarWhereWithAggregatesInput | Prisma.usersScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"users"> | string
+  user_id?: Prisma.UuidWithAggregatesFilter<"users"> | string
+  email?: Prisma.StringWithAggregatesFilter<"users"> | string
   username?: Prisma.StringWithAggregatesFilter<"users"> | string
-  createat?: Prisma.DateTimeNullableWithAggregatesFilter<"users"> | Date | string | null
+  role?: Prisma.Enumuser_roleNullableWithAggregatesFilter<"users"> | $Enums.user_role | null
+  created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"users"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"users"> | Date | string | null
 }
 
 export type usersCreateInput = {
-  id: string
+  user_id?: string
+  email: string
   username: string
-  createat?: Date | string | null
-  daily_log?: Prisma.daily_logCreateNestedManyWithoutUsersInput
+  role?: $Enums.user_role | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  user_profiles?: Prisma.user_profilesCreateNestedOneWithoutUsersInput
+  daily_logs?: Prisma.daily_logsCreateNestedManyWithoutUsersInput
 }
 
 export type usersUncheckedCreateInput = {
-  id: string
+  user_id?: string
+  email: string
   username: string
-  createat?: Date | string | null
-  daily_log?: Prisma.daily_logUncheckedCreateNestedManyWithoutUsersInput
+  role?: $Enums.user_role | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  user_profiles?: Prisma.user_profilesUncheckedCreateNestedOneWithoutUsersInput
+  daily_logs?: Prisma.daily_logsUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type usersUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  daily_log?: Prisma.daily_logUpdateManyWithoutUsersNestedInput
+  role?: Prisma.NullableEnumuser_roleFieldUpdateOperationsInput | $Enums.user_role | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user_profiles?: Prisma.user_profilesUpdateOneWithoutUsersNestedInput
+  daily_logs?: Prisma.daily_logsUpdateManyWithoutUsersNestedInput
 }
 
 export type usersUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  daily_log?: Prisma.daily_logUncheckedUpdateManyWithoutUsersNestedInput
+  role?: Prisma.NullableEnumuser_roleFieldUpdateOperationsInput | $Enums.user_role | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user_profiles?: Prisma.user_profilesUncheckedUpdateOneWithoutUsersNestedInput
+  daily_logs?: Prisma.daily_logsUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type usersCreateManyInput = {
-  id: string
+  user_id?: string
+  email: string
   username: string
-  createat?: Date | string | null
+  role?: $Enums.user_role | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
 }
 
 export type usersUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.NullableEnumuser_roleFieldUpdateOperationsInput | $Enums.user_role | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type usersUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.NullableEnumuser_roleFieldUpdateOperationsInput | $Enums.user_role | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type usersCountOrderByAggregateInput = {
+  user_id?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  username?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type usersMaxOrderByAggregateInput = {
+  user_id?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  username?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type usersMinOrderByAggregateInput = {
+  user_id?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  username?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type UsersScalarRelationFilter = {
@@ -255,76 +346,156 @@ export type UsersScalarRelationFilter = {
   isNot?: Prisma.usersWhereInput
 }
 
-export type usersCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
-  createat?: Prisma.SortOrder
+export type StringFieldUpdateOperationsInput = {
+  set?: string
 }
 
-export type usersMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
-  createat?: Prisma.SortOrder
+export type NullableEnumuser_roleFieldUpdateOperationsInput = {
+  set?: $Enums.user_role | null
 }
 
-export type usersMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  username?: Prisma.SortOrder
-  createat?: Prisma.SortOrder
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
-export type usersCreateNestedOneWithoutDaily_logInput = {
-  create?: Prisma.XOR<Prisma.usersCreateWithoutDaily_logInput, Prisma.usersUncheckedCreateWithoutDaily_logInput>
-  connectOrCreate?: Prisma.usersCreateOrConnectWithoutDaily_logInput
+export type usersCreateNestedOneWithoutUser_profilesInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutUser_profilesInput, Prisma.usersUncheckedCreateWithoutUser_profilesInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutUser_profilesInput
   connect?: Prisma.usersWhereUniqueInput
 }
 
-export type usersUpdateOneRequiredWithoutDaily_logNestedInput = {
-  create?: Prisma.XOR<Prisma.usersCreateWithoutDaily_logInput, Prisma.usersUncheckedCreateWithoutDaily_logInput>
-  connectOrCreate?: Prisma.usersCreateOrConnectWithoutDaily_logInput
-  upsert?: Prisma.usersUpsertWithoutDaily_logInput
+export type usersUpdateOneRequiredWithoutUser_profilesNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutUser_profilesInput, Prisma.usersUncheckedCreateWithoutUser_profilesInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutUser_profilesInput
+  upsert?: Prisma.usersUpsertWithoutUser_profilesInput
   connect?: Prisma.usersWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutDaily_logInput, Prisma.usersUpdateWithoutDaily_logInput>, Prisma.usersUncheckedUpdateWithoutDaily_logInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutUser_profilesInput, Prisma.usersUpdateWithoutUser_profilesInput>, Prisma.usersUncheckedUpdateWithoutUser_profilesInput>
 }
 
-export type usersCreateWithoutDaily_logInput = {
-  id: string
+export type usersCreateNestedOneWithoutDaily_logsInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutDaily_logsInput, Prisma.usersUncheckedCreateWithoutDaily_logsInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutDaily_logsInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersUpdateOneRequiredWithoutDaily_logsNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutDaily_logsInput, Prisma.usersUncheckedCreateWithoutDaily_logsInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutDaily_logsInput
+  upsert?: Prisma.usersUpsertWithoutDaily_logsInput
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutDaily_logsInput, Prisma.usersUpdateWithoutDaily_logsInput>, Prisma.usersUncheckedUpdateWithoutDaily_logsInput>
+}
+
+export type usersCreateWithoutUser_profilesInput = {
+  user_id?: string
+  email: string
   username: string
-  createat?: Date | string | null
+  role?: $Enums.user_role | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  daily_logs?: Prisma.daily_logsCreateNestedManyWithoutUsersInput
 }
 
-export type usersUncheckedCreateWithoutDaily_logInput = {
-  id: string
+export type usersUncheckedCreateWithoutUser_profilesInput = {
+  user_id?: string
+  email: string
   username: string
-  createat?: Date | string | null
+  role?: $Enums.user_role | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  daily_logs?: Prisma.daily_logsUncheckedCreateNestedManyWithoutUsersInput
 }
 
-export type usersCreateOrConnectWithoutDaily_logInput = {
+export type usersCreateOrConnectWithoutUser_profilesInput = {
   where: Prisma.usersWhereUniqueInput
-  create: Prisma.XOR<Prisma.usersCreateWithoutDaily_logInput, Prisma.usersUncheckedCreateWithoutDaily_logInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutUser_profilesInput, Prisma.usersUncheckedCreateWithoutUser_profilesInput>
 }
 
-export type usersUpsertWithoutDaily_logInput = {
-  update: Prisma.XOR<Prisma.usersUpdateWithoutDaily_logInput, Prisma.usersUncheckedUpdateWithoutDaily_logInput>
-  create: Prisma.XOR<Prisma.usersCreateWithoutDaily_logInput, Prisma.usersUncheckedCreateWithoutDaily_logInput>
+export type usersUpsertWithoutUser_profilesInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutUser_profilesInput, Prisma.usersUncheckedUpdateWithoutUser_profilesInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutUser_profilesInput, Prisma.usersUncheckedCreateWithoutUser_profilesInput>
   where?: Prisma.usersWhereInput
 }
 
-export type usersUpdateToOneWithWhereWithoutDaily_logInput = {
+export type usersUpdateToOneWithWhereWithoutUser_profilesInput = {
   where?: Prisma.usersWhereInput
-  data: Prisma.XOR<Prisma.usersUpdateWithoutDaily_logInput, Prisma.usersUncheckedUpdateWithoutDaily_logInput>
+  data: Prisma.XOR<Prisma.usersUpdateWithoutUser_profilesInput, Prisma.usersUncheckedUpdateWithoutUser_profilesInput>
 }
 
-export type usersUpdateWithoutDaily_logInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+export type usersUpdateWithoutUser_profilesInput = {
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.NullableEnumuser_roleFieldUpdateOperationsInput | $Enums.user_role | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  daily_logs?: Prisma.daily_logsUpdateManyWithoutUsersNestedInput
 }
 
-export type usersUncheckedUpdateWithoutDaily_logInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+export type usersUncheckedUpdateWithoutUser_profilesInput = {
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.NullableEnumuser_roleFieldUpdateOperationsInput | $Enums.user_role | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  daily_logs?: Prisma.daily_logsUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+export type usersCreateWithoutDaily_logsInput = {
+  user_id?: string
+  email: string
+  username: string
+  role?: $Enums.user_role | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  user_profiles?: Prisma.user_profilesCreateNestedOneWithoutUsersInput
+}
+
+export type usersUncheckedCreateWithoutDaily_logsInput = {
+  user_id?: string
+  email: string
+  username: string
+  role?: $Enums.user_role | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  user_profiles?: Prisma.user_profilesUncheckedCreateNestedOneWithoutUsersInput
+}
+
+export type usersCreateOrConnectWithoutDaily_logsInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutDaily_logsInput, Prisma.usersUncheckedCreateWithoutDaily_logsInput>
+}
+
+export type usersUpsertWithoutDaily_logsInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutDaily_logsInput, Prisma.usersUncheckedUpdateWithoutDaily_logsInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutDaily_logsInput, Prisma.usersUncheckedCreateWithoutDaily_logsInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutDaily_logsInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutDaily_logsInput, Prisma.usersUncheckedUpdateWithoutDaily_logsInput>
+}
+
+export type usersUpdateWithoutDaily_logsInput = {
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.NullableEnumuser_roleFieldUpdateOperationsInput | $Enums.user_role | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user_profiles?: Prisma.user_profilesUpdateOneWithoutUsersNestedInput
+}
+
+export type usersUncheckedUpdateWithoutDaily_logsInput = {
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.NullableEnumuser_roleFieldUpdateOperationsInput | $Enums.user_role | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user_profiles?: Prisma.user_profilesUncheckedUpdateOneWithoutUsersNestedInput
 }
 
 
@@ -333,11 +504,11 @@ export type usersUncheckedUpdateWithoutDaily_logInput = {
  */
 
 export type UsersCountOutputType = {
-  daily_log: number
+  daily_logs: number
 }
 
 export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  daily_log?: boolean | UsersCountOutputTypeCountDaily_logArgs
+  daily_logs?: boolean | UsersCountOutputTypeCountDaily_logsArgs
 }
 
 /**
@@ -353,40 +524,54 @@ export type UsersCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
 /**
  * UsersCountOutputType without action
  */
-export type UsersCountOutputTypeCountDaily_logArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.daily_logWhereInput
+export type UsersCountOutputTypeCountDaily_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.daily_logsWhereInput
 }
 
 
 export type usersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  user_id?: boolean
+  email?: boolean
   username?: boolean
-  createat?: boolean
-  daily_log?: boolean | Prisma.users$daily_logArgs<ExtArgs>
+  role?: boolean
+  created_at?: boolean
+  updated_at?: boolean
+  user_profiles?: boolean | Prisma.users$user_profilesArgs<ExtArgs>
+  daily_logs?: boolean | Prisma.users$daily_logsArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["users"]>
 
 export type usersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  user_id?: boolean
+  email?: boolean
   username?: boolean
-  createat?: boolean
+  role?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }, ExtArgs["result"]["users"]>
 
 export type usersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  user_id?: boolean
+  email?: boolean
   username?: boolean
-  createat?: boolean
+  role?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }, ExtArgs["result"]["users"]>
 
 export type usersSelectScalar = {
-  id?: boolean
+  user_id?: boolean
+  email?: boolean
   username?: boolean
-  createat?: boolean
+  role?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type usersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "createat", ExtArgs["result"]["users"]>
+export type usersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"user_id" | "email" | "username" | "role" | "created_at" | "updated_at", ExtArgs["result"]["users"]>
 export type usersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  daily_log?: boolean | Prisma.users$daily_logArgs<ExtArgs>
+  user_profiles?: boolean | Prisma.users$user_profilesArgs<ExtArgs>
+  daily_logs?: boolean | Prisma.users$daily_logsArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type usersIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -395,12 +580,16 @@ export type usersIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $usersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "users"
   objects: {
-    daily_log: Prisma.$daily_logPayload<ExtArgs>[]
+    user_profiles: Prisma.$user_profilesPayload<ExtArgs> | null
+    daily_logs: Prisma.$daily_logsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    user_id: string
+    email: string
     username: string
-    createat: Date | null
+    role: $Enums.user_role | null
+    created_at: Date | null
+    updated_at: Date | null
   }, ExtArgs["result"]["users"]>
   composites: {}
 }
@@ -484,8 +673,8 @@ export interface usersDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    * // Get first 10 Users
    * const users = await prisma.users.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const usersWithIdOnly = await prisma.users.findMany({ select: { id: true } })
+   * // Only select the `user_id`
+   * const usersWithUser_idOnly = await prisma.users.findMany({ select: { user_id: true } })
    * 
    */
   findMany<T extends usersFindManyArgs>(args?: Prisma.SelectSubset<T, usersFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -529,9 +718,9 @@ export interface usersDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    *   ]
    * })
    * 
-   * // Create many Users and only return the `id`
-   * const usersWithIdOnly = await prisma.users.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Users and only return the `user_id`
+   * const usersWithUser_idOnly = await prisma.users.createManyAndReturn({
+   *   select: { user_id: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -620,9 +809,9 @@ export interface usersDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    *   ]
    * })
    * 
-   * // Update zero or more Users and only return the `id`
-   * const usersWithIdOnly = await prisma.users.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Users and only return the `user_id`
+   * const usersWithUser_idOnly = await prisma.users.updateManyAndReturn({
+   *   select: { user_id: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -795,7 +984,8 @@ readonly fields: usersFieldRefs;
  */
 export interface Prisma__usersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  daily_log<T extends Prisma.users$daily_logArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$daily_logArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$daily_logPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user_profiles<T extends Prisma.users$user_profilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$user_profilesArgs<ExtArgs>>): Prisma.Prisma__user_profilesClient<runtime.Types.Result.GetResult<Prisma.$user_profilesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  daily_logs<T extends Prisma.users$daily_logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$daily_logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$daily_logsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -825,9 +1015,12 @@ export interface Prisma__usersClient<T, Null = never, ExtArgs extends runtime.Ty
  * Fields of the users model
  */
 export interface usersFieldRefs {
-  readonly id: Prisma.FieldRef<"users", 'String'>
+  readonly user_id: Prisma.FieldRef<"users", 'String'>
+  readonly email: Prisma.FieldRef<"users", 'String'>
   readonly username: Prisma.FieldRef<"users", 'String'>
-  readonly createat: Prisma.FieldRef<"users", 'DateTime'>
+  readonly role: Prisma.FieldRef<"users", 'user_role'>
+  readonly created_at: Prisma.FieldRef<"users", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"users", 'DateTime'>
 }
     
 
@@ -1221,27 +1414,46 @@ export type usersDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * users.daily_log
+ * users.user_profiles
  */
-export type users$daily_logArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type users$user_profilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the daily_log
+   * Select specific fields to fetch from the user_profiles
    */
-  select?: Prisma.daily_logSelect<ExtArgs> | null
+  select?: Prisma.user_profilesSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the daily_log
+   * Omit specific fields from the user_profiles
    */
-  omit?: Prisma.daily_logOmit<ExtArgs> | null
+  omit?: Prisma.user_profilesOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.daily_logInclude<ExtArgs> | null
-  where?: Prisma.daily_logWhereInput
-  orderBy?: Prisma.daily_logOrderByWithRelationInput | Prisma.daily_logOrderByWithRelationInput[]
-  cursor?: Prisma.daily_logWhereUniqueInput
+  include?: Prisma.user_profilesInclude<ExtArgs> | null
+  where?: Prisma.user_profilesWhereInput
+}
+
+/**
+ * users.daily_logs
+ */
+export type users$daily_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the daily_logs
+   */
+  select?: Prisma.daily_logsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the daily_logs
+   */
+  omit?: Prisma.daily_logsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.daily_logsInclude<ExtArgs> | null
+  where?: Prisma.daily_logsWhereInput
+  orderBy?: Prisma.daily_logsOrderByWithRelationInput | Prisma.daily_logsOrderByWithRelationInput[]
+  cursor?: Prisma.daily_logsWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.Daily_logScalarFieldEnum | Prisma.Daily_logScalarFieldEnum[]
+  distinct?: Prisma.Daily_logsScalarFieldEnum | Prisma.Daily_logsScalarFieldEnum[]
 }
 
 /**

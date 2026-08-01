@@ -27,69 +27,87 @@ export type AggregateConsumed_foods = {
 }
 
 export type Consumed_foodsAvgAggregateOutputType = {
-  quantity: runtime.Decimal | null
+  amount: number | null
 }
 
 export type Consumed_foodsSumAggregateOutputType = {
-  quantity: runtime.Decimal | null
+  amount: number | null
 }
 
 export type Consumed_foodsMinAggregateOutputType = {
-  id: string | null
-  quantity: runtime.Decimal | null
-  food_id: string | null
+  cf_id: string | null
   daily_log_id: string | null
-  createat: Date | null
+  food_id: string | null
+  amount: number | null
+  amount_type: $Enums.amount_unit_type | null
+  meal_type: string | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type Consumed_foodsMaxAggregateOutputType = {
-  id: string | null
-  quantity: runtime.Decimal | null
-  food_id: string | null
+  cf_id: string | null
   daily_log_id: string | null
-  createat: Date | null
+  food_id: string | null
+  amount: number | null
+  amount_type: $Enums.amount_unit_type | null
+  meal_type: string | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type Consumed_foodsCountAggregateOutputType = {
-  id: number
-  quantity: number
-  food_id: number
+  cf_id: number
   daily_log_id: number
-  createat: number
+  food_id: number
+  amount: number
+  amount_type: number
+  meal_type: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
 
 export type Consumed_foodsAvgAggregateInputType = {
-  quantity?: true
+  amount?: true
 }
 
 export type Consumed_foodsSumAggregateInputType = {
-  quantity?: true
+  amount?: true
 }
 
 export type Consumed_foodsMinAggregateInputType = {
-  id?: true
-  quantity?: true
-  food_id?: true
+  cf_id?: true
   daily_log_id?: true
-  createat?: true
+  food_id?: true
+  amount?: true
+  amount_type?: true
+  meal_type?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type Consumed_foodsMaxAggregateInputType = {
-  id?: true
-  quantity?: true
-  food_id?: true
+  cf_id?: true
   daily_log_id?: true
-  createat?: true
+  food_id?: true
+  amount?: true
+  amount_type?: true
+  meal_type?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type Consumed_foodsCountAggregateInputType = {
-  id?: true
-  quantity?: true
-  food_id?: true
+  cf_id?: true
   daily_log_id?: true
-  createat?: true
+  food_id?: true
+  amount?: true
+  amount_type?: true
+  meal_type?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -180,11 +198,14 @@ export type consumed_foodsGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 export type Consumed_foodsGroupByOutputType = {
-  id: string
-  quantity: runtime.Decimal
-  food_id: string
+  cf_id: string
   daily_log_id: string
-  createat: Date | null
+  food_id: string
+  amount: number
+  amount_type: $Enums.amount_unit_type
+  meal_type: string | null
+  created_at: Date | null
+  updated_at: Date | null
   _count: Consumed_foodsCountAggregateOutputType | null
   _avg: Consumed_foodsAvgAggregateOutputType | null
   _sum: Consumed_foodsSumAggregateOutputType | null
@@ -211,44 +232,56 @@ export type consumed_foodsWhereInput = {
   AND?: Prisma.consumed_foodsWhereInput | Prisma.consumed_foodsWhereInput[]
   OR?: Prisma.consumed_foodsWhereInput[]
   NOT?: Prisma.consumed_foodsWhereInput | Prisma.consumed_foodsWhereInput[]
-  id?: Prisma.StringFilter<"consumed_foods"> | string
-  quantity?: Prisma.DecimalFilter<"consumed_foods"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  food_id?: Prisma.StringFilter<"consumed_foods"> | string
-  daily_log_id?: Prisma.StringFilter<"consumed_foods"> | string
-  createat?: Prisma.DateTimeNullableFilter<"consumed_foods"> | Date | string | null
-  daily_log?: Prisma.XOR<Prisma.Daily_logScalarRelationFilter, Prisma.daily_logWhereInput>
+  cf_id?: Prisma.UuidFilter<"consumed_foods"> | string
+  daily_log_id?: Prisma.UuidFilter<"consumed_foods"> | string
+  food_id?: Prisma.UuidFilter<"consumed_foods"> | string
+  amount?: Prisma.FloatFilter<"consumed_foods"> | number
+  amount_type?: Prisma.Enumamount_unit_typeFilter<"consumed_foods"> | $Enums.amount_unit_type
+  meal_type?: Prisma.StringNullableFilter<"consumed_foods"> | string | null
+  created_at?: Prisma.DateTimeNullableFilter<"consumed_foods"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableFilter<"consumed_foods"> | Date | string | null
+  daily_logs?: Prisma.XOR<Prisma.Daily_logsScalarRelationFilter, Prisma.daily_logsWhereInput>
   foods?: Prisma.XOR<Prisma.FoodsScalarRelationFilter, Prisma.foodsWhereInput>
 }
 
 export type consumed_foodsOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
+  cf_id?: Prisma.SortOrder
   daily_log_id?: Prisma.SortOrder
-  createat?: Prisma.SortOrderInput | Prisma.SortOrder
-  daily_log?: Prisma.daily_logOrderByWithRelationInput
+  food_id?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  amount_type?: Prisma.SortOrder
+  meal_type?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  daily_logs?: Prisma.daily_logsOrderByWithRelationInput
   foods?: Prisma.foodsOrderByWithRelationInput
 }
 
 export type consumed_foodsWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  cf_id?: string
   AND?: Prisma.consumed_foodsWhereInput | Prisma.consumed_foodsWhereInput[]
   OR?: Prisma.consumed_foodsWhereInput[]
   NOT?: Prisma.consumed_foodsWhereInput | Prisma.consumed_foodsWhereInput[]
-  quantity?: Prisma.DecimalFilter<"consumed_foods"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  food_id?: Prisma.StringFilter<"consumed_foods"> | string
-  daily_log_id?: Prisma.StringFilter<"consumed_foods"> | string
-  createat?: Prisma.DateTimeNullableFilter<"consumed_foods"> | Date | string | null
-  daily_log?: Prisma.XOR<Prisma.Daily_logScalarRelationFilter, Prisma.daily_logWhereInput>
+  daily_log_id?: Prisma.UuidFilter<"consumed_foods"> | string
+  food_id?: Prisma.UuidFilter<"consumed_foods"> | string
+  amount?: Prisma.FloatFilter<"consumed_foods"> | number
+  amount_type?: Prisma.Enumamount_unit_typeFilter<"consumed_foods"> | $Enums.amount_unit_type
+  meal_type?: Prisma.StringNullableFilter<"consumed_foods"> | string | null
+  created_at?: Prisma.DateTimeNullableFilter<"consumed_foods"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableFilter<"consumed_foods"> | Date | string | null
+  daily_logs?: Prisma.XOR<Prisma.Daily_logsScalarRelationFilter, Prisma.daily_logsWhereInput>
   foods?: Prisma.XOR<Prisma.FoodsScalarRelationFilter, Prisma.foodsWhereInput>
-}, "id">
+}, "cf_id">
 
 export type consumed_foodsOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
+  cf_id?: Prisma.SortOrder
   daily_log_id?: Prisma.SortOrder
-  createat?: Prisma.SortOrderInput | Prisma.SortOrder
+  food_id?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  amount_type?: Prisma.SortOrder
+  meal_type?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.consumed_foodsCountOrderByAggregateInput
   _avg?: Prisma.consumed_foodsAvgOrderByAggregateInput
   _max?: Prisma.consumed_foodsMaxOrderByAggregateInput
@@ -260,97 +293,89 @@ export type consumed_foodsScalarWhereWithAggregatesInput = {
   AND?: Prisma.consumed_foodsScalarWhereWithAggregatesInput | Prisma.consumed_foodsScalarWhereWithAggregatesInput[]
   OR?: Prisma.consumed_foodsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.consumed_foodsScalarWhereWithAggregatesInput | Prisma.consumed_foodsScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"consumed_foods"> | string
-  quantity?: Prisma.DecimalWithAggregatesFilter<"consumed_foods"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  food_id?: Prisma.StringWithAggregatesFilter<"consumed_foods"> | string
-  daily_log_id?: Prisma.StringWithAggregatesFilter<"consumed_foods"> | string
-  createat?: Prisma.DateTimeNullableWithAggregatesFilter<"consumed_foods"> | Date | string | null
+  cf_id?: Prisma.UuidWithAggregatesFilter<"consumed_foods"> | string
+  daily_log_id?: Prisma.UuidWithAggregatesFilter<"consumed_foods"> | string
+  food_id?: Prisma.UuidWithAggregatesFilter<"consumed_foods"> | string
+  amount?: Prisma.FloatWithAggregatesFilter<"consumed_foods"> | number
+  amount_type?: Prisma.Enumamount_unit_typeWithAggregatesFilter<"consumed_foods"> | $Enums.amount_unit_type
+  meal_type?: Prisma.StringNullableWithAggregatesFilter<"consumed_foods"> | string | null
+  created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"consumed_foods"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"consumed_foods"> | Date | string | null
 }
 
 export type consumed_foodsCreateInput = {
-  id: string
-  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
-  createat?: Date | string | null
-  daily_log: Prisma.daily_logCreateNestedOneWithoutConsumed_foodsInput
+  cf_id?: string
+  amount: number
+  amount_type: $Enums.amount_unit_type
+  meal_type?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  daily_logs: Prisma.daily_logsCreateNestedOneWithoutConsumed_foodsInput
   foods: Prisma.foodsCreateNestedOneWithoutConsumed_foodsInput
 }
 
 export type consumed_foodsUncheckedCreateInput = {
-  id: string
-  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
-  food_id: string
+  cf_id?: string
   daily_log_id: string
-  createat?: Date | string | null
+  food_id: string
+  amount: number
+  amount_type: $Enums.amount_unit_type
+  meal_type?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
 }
 
 export type consumed_foodsUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  daily_log?: Prisma.daily_logUpdateOneRequiredWithoutConsumed_foodsNestedInput
+  cf_id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  amount_type?: Prisma.Enumamount_unit_typeFieldUpdateOperationsInput | $Enums.amount_unit_type
+  meal_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  daily_logs?: Prisma.daily_logsUpdateOneRequiredWithoutConsumed_foodsNestedInput
   foods?: Prisma.foodsUpdateOneRequiredWithoutConsumed_foodsNestedInput
 }
 
 export type consumed_foodsUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  food_id?: Prisma.StringFieldUpdateOperationsInput | string
+  cf_id?: Prisma.StringFieldUpdateOperationsInput | string
   daily_log_id?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  food_id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  amount_type?: Prisma.Enumamount_unit_typeFieldUpdateOperationsInput | $Enums.amount_unit_type
+  meal_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type consumed_foodsCreateManyInput = {
-  id: string
-  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
-  food_id: string
+  cf_id?: string
   daily_log_id: string
-  createat?: Date | string | null
+  food_id: string
+  amount: number
+  amount_type: $Enums.amount_unit_type
+  meal_type?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
 }
 
 export type consumed_foodsUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cf_id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  amount_type?: Prisma.Enumamount_unit_typeFieldUpdateOperationsInput | $Enums.amount_unit_type
+  meal_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type consumed_foodsUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  food_id?: Prisma.StringFieldUpdateOperationsInput | string
+  cf_id?: Prisma.StringFieldUpdateOperationsInput | string
   daily_log_id?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-}
-
-export type consumed_foodsCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
-  daily_log_id?: Prisma.SortOrder
-  createat?: Prisma.SortOrder
-}
-
-export type consumed_foodsAvgOrderByAggregateInput = {
-  quantity?: Prisma.SortOrder
-}
-
-export type consumed_foodsMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
-  daily_log_id?: Prisma.SortOrder
-  createat?: Prisma.SortOrder
-}
-
-export type consumed_foodsMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  quantity?: Prisma.SortOrder
-  food_id?: Prisma.SortOrder
-  daily_log_id?: Prisma.SortOrder
-  createat?: Prisma.SortOrder
-}
-
-export type consumed_foodsSumOrderByAggregateInput = {
-  quantity?: Prisma.SortOrder
+  food_id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  amount_type?: Prisma.Enumamount_unit_typeFieldUpdateOperationsInput | $Enums.amount_unit_type
+  meal_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type Consumed_foodsListRelationFilter = {
@@ -363,61 +388,86 @@ export type consumed_foodsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type consumed_foodsCountOrderByAggregateInput = {
+  cf_id?: Prisma.SortOrder
+  daily_log_id?: Prisma.SortOrder
+  food_id?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  amount_type?: Prisma.SortOrder
+  meal_type?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+export type consumed_foodsAvgOrderByAggregateInput = {
+  amount?: Prisma.SortOrder
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
+export type consumed_foodsMaxOrderByAggregateInput = {
+  cf_id?: Prisma.SortOrder
+  daily_log_id?: Prisma.SortOrder
+  food_id?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  amount_type?: Prisma.SortOrder
+  meal_type?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
-export type consumed_foodsCreateNestedManyWithoutDaily_logInput = {
-  create?: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logInput> | Prisma.consumed_foodsCreateWithoutDaily_logInput[] | Prisma.consumed_foodsUncheckedCreateWithoutDaily_logInput[]
-  connectOrCreate?: Prisma.consumed_foodsCreateOrConnectWithoutDaily_logInput | Prisma.consumed_foodsCreateOrConnectWithoutDaily_logInput[]
-  createMany?: Prisma.consumed_foodsCreateManyDaily_logInputEnvelope
+export type consumed_foodsMinOrderByAggregateInput = {
+  cf_id?: Prisma.SortOrder
+  daily_log_id?: Prisma.SortOrder
+  food_id?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  amount_type?: Prisma.SortOrder
+  meal_type?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type consumed_foodsSumOrderByAggregateInput = {
+  amount?: Prisma.SortOrder
+}
+
+export type consumed_foodsCreateNestedManyWithoutDaily_logsInput = {
+  create?: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logsInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logsInput> | Prisma.consumed_foodsCreateWithoutDaily_logsInput[] | Prisma.consumed_foodsUncheckedCreateWithoutDaily_logsInput[]
+  connectOrCreate?: Prisma.consumed_foodsCreateOrConnectWithoutDaily_logsInput | Prisma.consumed_foodsCreateOrConnectWithoutDaily_logsInput[]
+  createMany?: Prisma.consumed_foodsCreateManyDaily_logsInputEnvelope
   connect?: Prisma.consumed_foodsWhereUniqueInput | Prisma.consumed_foodsWhereUniqueInput[]
 }
 
-export type consumed_foodsUncheckedCreateNestedManyWithoutDaily_logInput = {
-  create?: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logInput> | Prisma.consumed_foodsCreateWithoutDaily_logInput[] | Prisma.consumed_foodsUncheckedCreateWithoutDaily_logInput[]
-  connectOrCreate?: Prisma.consumed_foodsCreateOrConnectWithoutDaily_logInput | Prisma.consumed_foodsCreateOrConnectWithoutDaily_logInput[]
-  createMany?: Prisma.consumed_foodsCreateManyDaily_logInputEnvelope
+export type consumed_foodsUncheckedCreateNestedManyWithoutDaily_logsInput = {
+  create?: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logsInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logsInput> | Prisma.consumed_foodsCreateWithoutDaily_logsInput[] | Prisma.consumed_foodsUncheckedCreateWithoutDaily_logsInput[]
+  connectOrCreate?: Prisma.consumed_foodsCreateOrConnectWithoutDaily_logsInput | Prisma.consumed_foodsCreateOrConnectWithoutDaily_logsInput[]
+  createMany?: Prisma.consumed_foodsCreateManyDaily_logsInputEnvelope
   connect?: Prisma.consumed_foodsWhereUniqueInput | Prisma.consumed_foodsWhereUniqueInput[]
 }
 
-export type consumed_foodsUpdateManyWithoutDaily_logNestedInput = {
-  create?: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logInput> | Prisma.consumed_foodsCreateWithoutDaily_logInput[] | Prisma.consumed_foodsUncheckedCreateWithoutDaily_logInput[]
-  connectOrCreate?: Prisma.consumed_foodsCreateOrConnectWithoutDaily_logInput | Prisma.consumed_foodsCreateOrConnectWithoutDaily_logInput[]
-  upsert?: Prisma.consumed_foodsUpsertWithWhereUniqueWithoutDaily_logInput | Prisma.consumed_foodsUpsertWithWhereUniqueWithoutDaily_logInput[]
-  createMany?: Prisma.consumed_foodsCreateManyDaily_logInputEnvelope
+export type consumed_foodsUpdateManyWithoutDaily_logsNestedInput = {
+  create?: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logsInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logsInput> | Prisma.consumed_foodsCreateWithoutDaily_logsInput[] | Prisma.consumed_foodsUncheckedCreateWithoutDaily_logsInput[]
+  connectOrCreate?: Prisma.consumed_foodsCreateOrConnectWithoutDaily_logsInput | Prisma.consumed_foodsCreateOrConnectWithoutDaily_logsInput[]
+  upsert?: Prisma.consumed_foodsUpsertWithWhereUniqueWithoutDaily_logsInput | Prisma.consumed_foodsUpsertWithWhereUniqueWithoutDaily_logsInput[]
+  createMany?: Prisma.consumed_foodsCreateManyDaily_logsInputEnvelope
   set?: Prisma.consumed_foodsWhereUniqueInput | Prisma.consumed_foodsWhereUniqueInput[]
   disconnect?: Prisma.consumed_foodsWhereUniqueInput | Prisma.consumed_foodsWhereUniqueInput[]
   delete?: Prisma.consumed_foodsWhereUniqueInput | Prisma.consumed_foodsWhereUniqueInput[]
   connect?: Prisma.consumed_foodsWhereUniqueInput | Prisma.consumed_foodsWhereUniqueInput[]
-  update?: Prisma.consumed_foodsUpdateWithWhereUniqueWithoutDaily_logInput | Prisma.consumed_foodsUpdateWithWhereUniqueWithoutDaily_logInput[]
-  updateMany?: Prisma.consumed_foodsUpdateManyWithWhereWithoutDaily_logInput | Prisma.consumed_foodsUpdateManyWithWhereWithoutDaily_logInput[]
+  update?: Prisma.consumed_foodsUpdateWithWhereUniqueWithoutDaily_logsInput | Prisma.consumed_foodsUpdateWithWhereUniqueWithoutDaily_logsInput[]
+  updateMany?: Prisma.consumed_foodsUpdateManyWithWhereWithoutDaily_logsInput | Prisma.consumed_foodsUpdateManyWithWhereWithoutDaily_logsInput[]
   deleteMany?: Prisma.consumed_foodsScalarWhereInput | Prisma.consumed_foodsScalarWhereInput[]
 }
 
-export type consumed_foodsUncheckedUpdateManyWithoutDaily_logNestedInput = {
-  create?: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logInput> | Prisma.consumed_foodsCreateWithoutDaily_logInput[] | Prisma.consumed_foodsUncheckedCreateWithoutDaily_logInput[]
-  connectOrCreate?: Prisma.consumed_foodsCreateOrConnectWithoutDaily_logInput | Prisma.consumed_foodsCreateOrConnectWithoutDaily_logInput[]
-  upsert?: Prisma.consumed_foodsUpsertWithWhereUniqueWithoutDaily_logInput | Prisma.consumed_foodsUpsertWithWhereUniqueWithoutDaily_logInput[]
-  createMany?: Prisma.consumed_foodsCreateManyDaily_logInputEnvelope
+export type consumed_foodsUncheckedUpdateManyWithoutDaily_logsNestedInput = {
+  create?: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logsInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logsInput> | Prisma.consumed_foodsCreateWithoutDaily_logsInput[] | Prisma.consumed_foodsUncheckedCreateWithoutDaily_logsInput[]
+  connectOrCreate?: Prisma.consumed_foodsCreateOrConnectWithoutDaily_logsInput | Prisma.consumed_foodsCreateOrConnectWithoutDaily_logsInput[]
+  upsert?: Prisma.consumed_foodsUpsertWithWhereUniqueWithoutDaily_logsInput | Prisma.consumed_foodsUpsertWithWhereUniqueWithoutDaily_logsInput[]
+  createMany?: Prisma.consumed_foodsCreateManyDaily_logsInputEnvelope
   set?: Prisma.consumed_foodsWhereUniqueInput | Prisma.consumed_foodsWhereUniqueInput[]
   disconnect?: Prisma.consumed_foodsWhereUniqueInput | Prisma.consumed_foodsWhereUniqueInput[]
   delete?: Prisma.consumed_foodsWhereUniqueInput | Prisma.consumed_foodsWhereUniqueInput[]
   connect?: Prisma.consumed_foodsWhereUniqueInput | Prisma.consumed_foodsWhereUniqueInput[]
-  update?: Prisma.consumed_foodsUpdateWithWhereUniqueWithoutDaily_logInput | Prisma.consumed_foodsUpdateWithWhereUniqueWithoutDaily_logInput[]
-  updateMany?: Prisma.consumed_foodsUpdateManyWithWhereWithoutDaily_logInput | Prisma.consumed_foodsUpdateManyWithWhereWithoutDaily_logInput[]
+  update?: Prisma.consumed_foodsUpdateWithWhereUniqueWithoutDaily_logsInput | Prisma.consumed_foodsUpdateWithWhereUniqueWithoutDaily_logsInput[]
+  updateMany?: Prisma.consumed_foodsUpdateManyWithWhereWithoutDaily_logsInput | Prisma.consumed_foodsUpdateManyWithWhereWithoutDaily_logsInput[]
   deleteMany?: Prisma.consumed_foodsScalarWhereInput | Prisma.consumed_foodsScalarWhereInput[]
 }
 
@@ -463,69 +513,96 @@ export type consumed_foodsUncheckedUpdateManyWithoutFoodsNestedInput = {
   deleteMany?: Prisma.consumed_foodsScalarWhereInput | Prisma.consumed_foodsScalarWhereInput[]
 }
 
-export type consumed_foodsCreateWithoutDaily_logInput = {
-  id: string
-  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
-  createat?: Date | string | null
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type Enumamount_unit_typeFieldUpdateOperationsInput = {
+  set?: $Enums.amount_unit_type
+}
+
+export type consumed_foodsCreateWithoutDaily_logsInput = {
+  cf_id?: string
+  amount: number
+  amount_type: $Enums.amount_unit_type
+  meal_type?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
   foods: Prisma.foodsCreateNestedOneWithoutConsumed_foodsInput
 }
 
-export type consumed_foodsUncheckedCreateWithoutDaily_logInput = {
-  id: string
-  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
+export type consumed_foodsUncheckedCreateWithoutDaily_logsInput = {
+  cf_id?: string
   food_id: string
-  createat?: Date | string | null
+  amount: number
+  amount_type: $Enums.amount_unit_type
+  meal_type?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
 }
 
-export type consumed_foodsCreateOrConnectWithoutDaily_logInput = {
+export type consumed_foodsCreateOrConnectWithoutDaily_logsInput = {
   where: Prisma.consumed_foodsWhereUniqueInput
-  create: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logInput>
+  create: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logsInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logsInput>
 }
 
-export type consumed_foodsCreateManyDaily_logInputEnvelope = {
-  data: Prisma.consumed_foodsCreateManyDaily_logInput | Prisma.consumed_foodsCreateManyDaily_logInput[]
+export type consumed_foodsCreateManyDaily_logsInputEnvelope = {
+  data: Prisma.consumed_foodsCreateManyDaily_logsInput | Prisma.consumed_foodsCreateManyDaily_logsInput[]
   skipDuplicates?: boolean
 }
 
-export type consumed_foodsUpsertWithWhereUniqueWithoutDaily_logInput = {
+export type consumed_foodsUpsertWithWhereUniqueWithoutDaily_logsInput = {
   where: Prisma.consumed_foodsWhereUniqueInput
-  update: Prisma.XOR<Prisma.consumed_foodsUpdateWithoutDaily_logInput, Prisma.consumed_foodsUncheckedUpdateWithoutDaily_logInput>
-  create: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logInput>
+  update: Prisma.XOR<Prisma.consumed_foodsUpdateWithoutDaily_logsInput, Prisma.consumed_foodsUncheckedUpdateWithoutDaily_logsInput>
+  create: Prisma.XOR<Prisma.consumed_foodsCreateWithoutDaily_logsInput, Prisma.consumed_foodsUncheckedCreateWithoutDaily_logsInput>
 }
 
-export type consumed_foodsUpdateWithWhereUniqueWithoutDaily_logInput = {
+export type consumed_foodsUpdateWithWhereUniqueWithoutDaily_logsInput = {
   where: Prisma.consumed_foodsWhereUniqueInput
-  data: Prisma.XOR<Prisma.consumed_foodsUpdateWithoutDaily_logInput, Prisma.consumed_foodsUncheckedUpdateWithoutDaily_logInput>
+  data: Prisma.XOR<Prisma.consumed_foodsUpdateWithoutDaily_logsInput, Prisma.consumed_foodsUncheckedUpdateWithoutDaily_logsInput>
 }
 
-export type consumed_foodsUpdateManyWithWhereWithoutDaily_logInput = {
+export type consumed_foodsUpdateManyWithWhereWithoutDaily_logsInput = {
   where: Prisma.consumed_foodsScalarWhereInput
-  data: Prisma.XOR<Prisma.consumed_foodsUpdateManyMutationInput, Prisma.consumed_foodsUncheckedUpdateManyWithoutDaily_logInput>
+  data: Prisma.XOR<Prisma.consumed_foodsUpdateManyMutationInput, Prisma.consumed_foodsUncheckedUpdateManyWithoutDaily_logsInput>
 }
 
 export type consumed_foodsScalarWhereInput = {
   AND?: Prisma.consumed_foodsScalarWhereInput | Prisma.consumed_foodsScalarWhereInput[]
   OR?: Prisma.consumed_foodsScalarWhereInput[]
   NOT?: Prisma.consumed_foodsScalarWhereInput | Prisma.consumed_foodsScalarWhereInput[]
-  id?: Prisma.StringFilter<"consumed_foods"> | string
-  quantity?: Prisma.DecimalFilter<"consumed_foods"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  food_id?: Prisma.StringFilter<"consumed_foods"> | string
-  daily_log_id?: Prisma.StringFilter<"consumed_foods"> | string
-  createat?: Prisma.DateTimeNullableFilter<"consumed_foods"> | Date | string | null
+  cf_id?: Prisma.UuidFilter<"consumed_foods"> | string
+  daily_log_id?: Prisma.UuidFilter<"consumed_foods"> | string
+  food_id?: Prisma.UuidFilter<"consumed_foods"> | string
+  amount?: Prisma.FloatFilter<"consumed_foods"> | number
+  amount_type?: Prisma.Enumamount_unit_typeFilter<"consumed_foods"> | $Enums.amount_unit_type
+  meal_type?: Prisma.StringNullableFilter<"consumed_foods"> | string | null
+  created_at?: Prisma.DateTimeNullableFilter<"consumed_foods"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableFilter<"consumed_foods"> | Date | string | null
 }
 
 export type consumed_foodsCreateWithoutFoodsInput = {
-  id: string
-  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
-  createat?: Date | string | null
-  daily_log: Prisma.daily_logCreateNestedOneWithoutConsumed_foodsInput
+  cf_id?: string
+  amount: number
+  amount_type: $Enums.amount_unit_type
+  meal_type?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
+  daily_logs: Prisma.daily_logsCreateNestedOneWithoutConsumed_foodsInput
 }
 
 export type consumed_foodsUncheckedCreateWithoutFoodsInput = {
-  id: string
-  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
+  cf_id?: string
   daily_log_id: string
-  createat?: Date | string | null
+  amount: number
+  amount_type: $Enums.amount_unit_type
+  meal_type?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
 }
 
 export type consumed_foodsCreateOrConnectWithoutFoodsInput = {
@@ -554,128 +631,167 @@ export type consumed_foodsUpdateManyWithWhereWithoutFoodsInput = {
   data: Prisma.XOR<Prisma.consumed_foodsUpdateManyMutationInput, Prisma.consumed_foodsUncheckedUpdateManyWithoutFoodsInput>
 }
 
-export type consumed_foodsCreateManyDaily_logInput = {
-  id: string
-  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
+export type consumed_foodsCreateManyDaily_logsInput = {
+  cf_id?: string
   food_id: string
-  createat?: Date | string | null
+  amount: number
+  amount_type: $Enums.amount_unit_type
+  meal_type?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
 }
 
-export type consumed_foodsUpdateWithoutDaily_logInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+export type consumed_foodsUpdateWithoutDaily_logsInput = {
+  cf_id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  amount_type?: Prisma.Enumamount_unit_typeFieldUpdateOperationsInput | $Enums.amount_unit_type
+  meal_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   foods?: Prisma.foodsUpdateOneRequiredWithoutConsumed_foodsNestedInput
 }
 
-export type consumed_foodsUncheckedUpdateWithoutDaily_logInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+export type consumed_foodsUncheckedUpdateWithoutDaily_logsInput = {
+  cf_id?: Prisma.StringFieldUpdateOperationsInput | string
   food_id?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  amount_type?: Prisma.Enumamount_unit_typeFieldUpdateOperationsInput | $Enums.amount_unit_type
+  meal_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type consumed_foodsUncheckedUpdateManyWithoutDaily_logInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+export type consumed_foodsUncheckedUpdateManyWithoutDaily_logsInput = {
+  cf_id?: Prisma.StringFieldUpdateOperationsInput | string
   food_id?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  amount_type?: Prisma.Enumamount_unit_typeFieldUpdateOperationsInput | $Enums.amount_unit_type
+  meal_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type consumed_foodsCreateManyFoodsInput = {
-  id: string
-  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
+  cf_id?: string
   daily_log_id: string
-  createat?: Date | string | null
+  amount: number
+  amount_type: $Enums.amount_unit_type
+  meal_type?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
 }
 
 export type consumed_foodsUpdateWithoutFoodsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  daily_log?: Prisma.daily_logUpdateOneRequiredWithoutConsumed_foodsNestedInput
+  cf_id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  amount_type?: Prisma.Enumamount_unit_typeFieldUpdateOperationsInput | $Enums.amount_unit_type
+  meal_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  daily_logs?: Prisma.daily_logsUpdateOneRequiredWithoutConsumed_foodsNestedInput
 }
 
 export type consumed_foodsUncheckedUpdateWithoutFoodsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  cf_id?: Prisma.StringFieldUpdateOperationsInput | string
   daily_log_id?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  amount_type?: Prisma.Enumamount_unit_typeFieldUpdateOperationsInput | $Enums.amount_unit_type
+  meal_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type consumed_foodsUncheckedUpdateManyWithoutFoodsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  cf_id?: Prisma.StringFieldUpdateOperationsInput | string
   daily_log_id?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  amount_type?: Prisma.Enumamount_unit_typeFieldUpdateOperationsInput | $Enums.amount_unit_type
+  meal_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
 
 export type consumed_foodsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  quantity?: boolean
-  food_id?: boolean
+  cf_id?: boolean
   daily_log_id?: boolean
-  createat?: boolean
-  daily_log?: boolean | Prisma.daily_logDefaultArgs<ExtArgs>
+  food_id?: boolean
+  amount?: boolean
+  amount_type?: boolean
+  meal_type?: boolean
+  created_at?: boolean
+  updated_at?: boolean
+  daily_logs?: boolean | Prisma.daily_logsDefaultArgs<ExtArgs>
   foods?: boolean | Prisma.foodsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["consumed_foods"]>
 
 export type consumed_foodsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  quantity?: boolean
-  food_id?: boolean
+  cf_id?: boolean
   daily_log_id?: boolean
-  createat?: boolean
-  daily_log?: boolean | Prisma.daily_logDefaultArgs<ExtArgs>
+  food_id?: boolean
+  amount?: boolean
+  amount_type?: boolean
+  meal_type?: boolean
+  created_at?: boolean
+  updated_at?: boolean
+  daily_logs?: boolean | Prisma.daily_logsDefaultArgs<ExtArgs>
   foods?: boolean | Prisma.foodsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["consumed_foods"]>
 
 export type consumed_foodsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
-  quantity?: boolean
-  food_id?: boolean
+  cf_id?: boolean
   daily_log_id?: boolean
-  createat?: boolean
-  daily_log?: boolean | Prisma.daily_logDefaultArgs<ExtArgs>
+  food_id?: boolean
+  amount?: boolean
+  amount_type?: boolean
+  meal_type?: boolean
+  created_at?: boolean
+  updated_at?: boolean
+  daily_logs?: boolean | Prisma.daily_logsDefaultArgs<ExtArgs>
   foods?: boolean | Prisma.foodsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["consumed_foods"]>
 
 export type consumed_foodsSelectScalar = {
-  id?: boolean
-  quantity?: boolean
-  food_id?: boolean
+  cf_id?: boolean
   daily_log_id?: boolean
-  createat?: boolean
+  food_id?: boolean
+  amount?: boolean
+  amount_type?: boolean
+  meal_type?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type consumed_foodsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "quantity" | "food_id" | "daily_log_id" | "createat", ExtArgs["result"]["consumed_foods"]>
+export type consumed_foodsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"cf_id" | "daily_log_id" | "food_id" | "amount" | "amount_type" | "meal_type" | "created_at" | "updated_at", ExtArgs["result"]["consumed_foods"]>
 export type consumed_foodsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  daily_log?: boolean | Prisma.daily_logDefaultArgs<ExtArgs>
+  daily_logs?: boolean | Prisma.daily_logsDefaultArgs<ExtArgs>
   foods?: boolean | Prisma.foodsDefaultArgs<ExtArgs>
 }
 export type consumed_foodsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  daily_log?: boolean | Prisma.daily_logDefaultArgs<ExtArgs>
+  daily_logs?: boolean | Prisma.daily_logsDefaultArgs<ExtArgs>
   foods?: boolean | Prisma.foodsDefaultArgs<ExtArgs>
 }
 export type consumed_foodsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  daily_log?: boolean | Prisma.daily_logDefaultArgs<ExtArgs>
+  daily_logs?: boolean | Prisma.daily_logsDefaultArgs<ExtArgs>
   foods?: boolean | Prisma.foodsDefaultArgs<ExtArgs>
 }
 
 export type $consumed_foodsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "consumed_foods"
   objects: {
-    daily_log: Prisma.$daily_logPayload<ExtArgs>
+    daily_logs: Prisma.$daily_logsPayload<ExtArgs>
     foods: Prisma.$foodsPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
-    quantity: runtime.Decimal
-    food_id: string
+    cf_id: string
     daily_log_id: string
-    createat: Date | null
+    food_id: string
+    amount: number
+    amount_type: $Enums.amount_unit_type
+    meal_type: string | null
+    created_at: Date | null
+    updated_at: Date | null
   }, ExtArgs["result"]["consumed_foods"]>
   composites: {}
 }
@@ -759,8 +875,8 @@ export interface consumed_foodsDelegate<ExtArgs extends runtime.Types.Extensions
    * // Get first 10 Consumed_foods
    * const consumed_foods = await prisma.consumed_foods.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const consumed_foodsWithIdOnly = await prisma.consumed_foods.findMany({ select: { id: true } })
+   * // Only select the `cf_id`
+   * const consumed_foodsWithCf_idOnly = await prisma.consumed_foods.findMany({ select: { cf_id: true } })
    * 
    */
   findMany<T extends consumed_foodsFindManyArgs>(args?: Prisma.SelectSubset<T, consumed_foodsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$consumed_foodsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -804,9 +920,9 @@ export interface consumed_foodsDelegate<ExtArgs extends runtime.Types.Extensions
    *   ]
    * })
    * 
-   * // Create many Consumed_foods and only return the `id`
-   * const consumed_foodsWithIdOnly = await prisma.consumed_foods.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Consumed_foods and only return the `cf_id`
+   * const consumed_foodsWithCf_idOnly = await prisma.consumed_foods.createManyAndReturn({
+   *   select: { cf_id: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -895,9 +1011,9 @@ export interface consumed_foodsDelegate<ExtArgs extends runtime.Types.Extensions
    *   ]
    * })
    * 
-   * // Update zero or more Consumed_foods and only return the `id`
-   * const consumed_foodsWithIdOnly = await prisma.consumed_foods.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Consumed_foods and only return the `cf_id`
+   * const consumed_foodsWithCf_idOnly = await prisma.consumed_foods.updateManyAndReturn({
+   *   select: { cf_id: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1070,7 +1186,7 @@ readonly fields: consumed_foodsFieldRefs;
  */
 export interface Prisma__consumed_foodsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  daily_log<T extends Prisma.daily_logDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.daily_logDefaultArgs<ExtArgs>>): Prisma.Prisma__daily_logClient<runtime.Types.Result.GetResult<Prisma.$daily_logPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  daily_logs<T extends Prisma.daily_logsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.daily_logsDefaultArgs<ExtArgs>>): Prisma.Prisma__daily_logsClient<runtime.Types.Result.GetResult<Prisma.$daily_logsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   foods<T extends Prisma.foodsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.foodsDefaultArgs<ExtArgs>>): Prisma.Prisma__foodsClient<runtime.Types.Result.GetResult<Prisma.$foodsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1101,11 +1217,14 @@ export interface Prisma__consumed_foodsClient<T, Null = never, ExtArgs extends r
  * Fields of the consumed_foods model
  */
 export interface consumed_foodsFieldRefs {
-  readonly id: Prisma.FieldRef<"consumed_foods", 'String'>
-  readonly quantity: Prisma.FieldRef<"consumed_foods", 'Decimal'>
-  readonly food_id: Prisma.FieldRef<"consumed_foods", 'String'>
+  readonly cf_id: Prisma.FieldRef<"consumed_foods", 'String'>
   readonly daily_log_id: Prisma.FieldRef<"consumed_foods", 'String'>
-  readonly createat: Prisma.FieldRef<"consumed_foods", 'DateTime'>
+  readonly food_id: Prisma.FieldRef<"consumed_foods", 'String'>
+  readonly amount: Prisma.FieldRef<"consumed_foods", 'Float'>
+  readonly amount_type: Prisma.FieldRef<"consumed_foods", 'amount_unit_type'>
+  readonly meal_type: Prisma.FieldRef<"consumed_foods", 'String'>
+  readonly created_at: Prisma.FieldRef<"consumed_foods", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"consumed_foods", 'DateTime'>
 }
     
 

@@ -27,69 +27,117 @@ export type AggregateFoods = {
 }
 
 export type FoodsAvgAggregateOutputType = {
-  calories: number | null
+  calories_per_serving: number | null
+  protein: number | null
+  fat: number | null
+  carbs: number | null
 }
 
 export type FoodsSumAggregateOutputType = {
-  calories: number | null
+  calories_per_serving: number | null
+  protein: number | null
+  fat: number | null
+  carbs: number | null
 }
 
 export type FoodsMinAggregateOutputType = {
-  id: string | null
+  food_id: string | null
   food_name: string | null
-  calories: number | null
+  calories_per_serving: number | null
+  serving_size: string | null
+  protein: number | null
+  fat: number | null
+  carbs: number | null
   category: string | null
-  createat: Date | null
+  image_url: string | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type FoodsMaxAggregateOutputType = {
-  id: string | null
+  food_id: string | null
   food_name: string | null
-  calories: number | null
+  calories_per_serving: number | null
+  serving_size: string | null
+  protein: number | null
+  fat: number | null
+  carbs: number | null
   category: string | null
-  createat: Date | null
+  image_url: string | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type FoodsCountAggregateOutputType = {
-  id: number
+  food_id: number
   food_name: number
-  calories: number
+  calories_per_serving: number
+  serving_size: number
+  protein: number
+  fat: number
+  carbs: number
   category: number
-  createat: number
+  image_url: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
 
 export type FoodsAvgAggregateInputType = {
-  calories?: true
+  calories_per_serving?: true
+  protein?: true
+  fat?: true
+  carbs?: true
 }
 
 export type FoodsSumAggregateInputType = {
-  calories?: true
+  calories_per_serving?: true
+  protein?: true
+  fat?: true
+  carbs?: true
 }
 
 export type FoodsMinAggregateInputType = {
-  id?: true
+  food_id?: true
   food_name?: true
-  calories?: true
+  calories_per_serving?: true
+  serving_size?: true
+  protein?: true
+  fat?: true
+  carbs?: true
   category?: true
-  createat?: true
+  image_url?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type FoodsMaxAggregateInputType = {
-  id?: true
+  food_id?: true
   food_name?: true
-  calories?: true
+  calories_per_serving?: true
+  serving_size?: true
+  protein?: true
+  fat?: true
+  carbs?: true
   category?: true
-  createat?: true
+  image_url?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type FoodsCountAggregateInputType = {
-  id?: true
+  food_id?: true
   food_name?: true
-  calories?: true
+  calories_per_serving?: true
+  serving_size?: true
+  protein?: true
+  fat?: true
+  carbs?: true
   category?: true
-  createat?: true
+  image_url?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -180,11 +228,17 @@ export type foodsGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 export type FoodsGroupByOutputType = {
-  id: string
+  food_id: string
   food_name: string
-  calories: number
-  category: string
-  createat: Date | null
+  calories_per_serving: number
+  serving_size: string
+  protein: number | null
+  fat: number | null
+  carbs: number | null
+  category: string | null
+  image_url: string | null
+  created_at: Date | null
+  updated_at: Date | null
   _count: FoodsCountAggregateOutputType | null
   _avg: FoodsAvgAggregateOutputType | null
   _sum: FoodsSumAggregateOutputType | null
@@ -211,41 +265,65 @@ export type foodsWhereInput = {
   AND?: Prisma.foodsWhereInput | Prisma.foodsWhereInput[]
   OR?: Prisma.foodsWhereInput[]
   NOT?: Prisma.foodsWhereInput | Prisma.foodsWhereInput[]
-  id?: Prisma.StringFilter<"foods"> | string
+  food_id?: Prisma.UuidFilter<"foods"> | string
   food_name?: Prisma.StringFilter<"foods"> | string
-  calories?: Prisma.IntFilter<"foods"> | number
-  category?: Prisma.StringFilter<"foods"> | string
-  createat?: Prisma.DateTimeNullableFilter<"foods"> | Date | string | null
+  calories_per_serving?: Prisma.IntFilter<"foods"> | number
+  serving_size?: Prisma.StringFilter<"foods"> | string
+  protein?: Prisma.FloatNullableFilter<"foods"> | number | null
+  fat?: Prisma.FloatNullableFilter<"foods"> | number | null
+  carbs?: Prisma.FloatNullableFilter<"foods"> | number | null
+  category?: Prisma.StringNullableFilter<"foods"> | string | null
+  image_url?: Prisma.StringNullableFilter<"foods"> | string | null
+  created_at?: Prisma.DateTimeNullableFilter<"foods"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableFilter<"foods"> | Date | string | null
   consumed_foods?: Prisma.Consumed_foodsListRelationFilter
 }
 
 export type foodsOrderByWithRelationInput = {
-  id?: Prisma.SortOrder
+  food_id?: Prisma.SortOrder
   food_name?: Prisma.SortOrder
-  calories?: Prisma.SortOrder
-  category?: Prisma.SortOrder
-  createat?: Prisma.SortOrderInput | Prisma.SortOrder
+  calories_per_serving?: Prisma.SortOrder
+  serving_size?: Prisma.SortOrder
+  protein?: Prisma.SortOrderInput | Prisma.SortOrder
+  fat?: Prisma.SortOrderInput | Prisma.SortOrder
+  carbs?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  image_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   consumed_foods?: Prisma.consumed_foodsOrderByRelationAggregateInput
 }
 
 export type foodsWhereUniqueInput = Prisma.AtLeast<{
-  id?: string
+  food_id?: string
+  food_name?: string
   AND?: Prisma.foodsWhereInput | Prisma.foodsWhereInput[]
   OR?: Prisma.foodsWhereInput[]
   NOT?: Prisma.foodsWhereInput | Prisma.foodsWhereInput[]
-  food_name?: Prisma.StringFilter<"foods"> | string
-  calories?: Prisma.IntFilter<"foods"> | number
-  category?: Prisma.StringFilter<"foods"> | string
-  createat?: Prisma.DateTimeNullableFilter<"foods"> | Date | string | null
+  calories_per_serving?: Prisma.IntFilter<"foods"> | number
+  serving_size?: Prisma.StringFilter<"foods"> | string
+  protein?: Prisma.FloatNullableFilter<"foods"> | number | null
+  fat?: Prisma.FloatNullableFilter<"foods"> | number | null
+  carbs?: Prisma.FloatNullableFilter<"foods"> | number | null
+  category?: Prisma.StringNullableFilter<"foods"> | string | null
+  image_url?: Prisma.StringNullableFilter<"foods"> | string | null
+  created_at?: Prisma.DateTimeNullableFilter<"foods"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableFilter<"foods"> | Date | string | null
   consumed_foods?: Prisma.Consumed_foodsListRelationFilter
-}, "id">
+}, "food_id" | "food_name">
 
 export type foodsOrderByWithAggregationInput = {
-  id?: Prisma.SortOrder
+  food_id?: Prisma.SortOrder
   food_name?: Prisma.SortOrder
-  calories?: Prisma.SortOrder
-  category?: Prisma.SortOrder
-  createat?: Prisma.SortOrderInput | Prisma.SortOrder
+  calories_per_serving?: Prisma.SortOrder
+  serving_size?: Prisma.SortOrder
+  protein?: Prisma.SortOrderInput | Prisma.SortOrder
+  fat?: Prisma.SortOrderInput | Prisma.SortOrder
+  carbs?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  image_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.foodsCountOrderByAggregateInput
   _avg?: Prisma.foodsAvgOrderByAggregateInput
   _max?: Prisma.foodsMaxOrderByAggregateInput
@@ -257,71 +335,175 @@ export type foodsScalarWhereWithAggregatesInput = {
   AND?: Prisma.foodsScalarWhereWithAggregatesInput | Prisma.foodsScalarWhereWithAggregatesInput[]
   OR?: Prisma.foodsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.foodsScalarWhereWithAggregatesInput | Prisma.foodsScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"foods"> | string
+  food_id?: Prisma.UuidWithAggregatesFilter<"foods"> | string
   food_name?: Prisma.StringWithAggregatesFilter<"foods"> | string
-  calories?: Prisma.IntWithAggregatesFilter<"foods"> | number
-  category?: Prisma.StringWithAggregatesFilter<"foods"> | string
-  createat?: Prisma.DateTimeNullableWithAggregatesFilter<"foods"> | Date | string | null
+  calories_per_serving?: Prisma.IntWithAggregatesFilter<"foods"> | number
+  serving_size?: Prisma.StringWithAggregatesFilter<"foods"> | string
+  protein?: Prisma.FloatNullableWithAggregatesFilter<"foods"> | number | null
+  fat?: Prisma.FloatNullableWithAggregatesFilter<"foods"> | number | null
+  carbs?: Prisma.FloatNullableWithAggregatesFilter<"foods"> | number | null
+  category?: Prisma.StringNullableWithAggregatesFilter<"foods"> | string | null
+  image_url?: Prisma.StringNullableWithAggregatesFilter<"foods"> | string | null
+  created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"foods"> | Date | string | null
+  updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"foods"> | Date | string | null
 }
 
 export type foodsCreateInput = {
-  id: string
+  food_id?: string
   food_name: string
-  calories: number
-  category: string
-  createat?: Date | string | null
+  calories_per_serving: number
+  serving_size: string
+  protein?: number | null
+  fat?: number | null
+  carbs?: number | null
+  category?: string | null
+  image_url?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
   consumed_foods?: Prisma.consumed_foodsCreateNestedManyWithoutFoodsInput
 }
 
 export type foodsUncheckedCreateInput = {
-  id: string
+  food_id?: string
   food_name: string
-  calories: number
-  category: string
-  createat?: Date | string | null
+  calories_per_serving: number
+  serving_size: string
+  protein?: number | null
+  fat?: number | null
+  carbs?: number | null
+  category?: string | null
+  image_url?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
   consumed_foods?: Prisma.consumed_foodsUncheckedCreateNestedManyWithoutFoodsInput
 }
 
 export type foodsUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  food_id?: Prisma.StringFieldUpdateOperationsInput | string
   food_name?: Prisma.StringFieldUpdateOperationsInput | string
-  calories?: Prisma.IntFieldUpdateOperationsInput | number
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  calories_per_serving?: Prisma.IntFieldUpdateOperationsInput | number
+  serving_size?: Prisma.StringFieldUpdateOperationsInput | string
+  protein?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  fat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  carbs?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consumed_foods?: Prisma.consumed_foodsUpdateManyWithoutFoodsNestedInput
 }
 
 export type foodsUncheckedUpdateInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  food_id?: Prisma.StringFieldUpdateOperationsInput | string
   food_name?: Prisma.StringFieldUpdateOperationsInput | string
-  calories?: Prisma.IntFieldUpdateOperationsInput | number
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  calories_per_serving?: Prisma.IntFieldUpdateOperationsInput | number
+  serving_size?: Prisma.StringFieldUpdateOperationsInput | string
+  protein?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  fat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  carbs?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consumed_foods?: Prisma.consumed_foodsUncheckedUpdateManyWithoutFoodsNestedInput
 }
 
 export type foodsCreateManyInput = {
-  id: string
+  food_id?: string
   food_name: string
-  calories: number
-  category: string
-  createat?: Date | string | null
+  calories_per_serving: number
+  serving_size: string
+  protein?: number | null
+  fat?: number | null
+  carbs?: number | null
+  category?: string | null
+  image_url?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
 }
 
 export type foodsUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  food_id?: Prisma.StringFieldUpdateOperationsInput | string
   food_name?: Prisma.StringFieldUpdateOperationsInput | string
-  calories?: Prisma.IntFieldUpdateOperationsInput | number
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  calories_per_serving?: Prisma.IntFieldUpdateOperationsInput | number
+  serving_size?: Prisma.StringFieldUpdateOperationsInput | string
+  protein?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  fat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  carbs?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type foodsUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  food_id?: Prisma.StringFieldUpdateOperationsInput | string
   food_name?: Prisma.StringFieldUpdateOperationsInput | string
-  calories?: Prisma.IntFieldUpdateOperationsInput | number
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  calories_per_serving?: Prisma.IntFieldUpdateOperationsInput | number
+  serving_size?: Prisma.StringFieldUpdateOperationsInput | string
+  protein?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  fat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  carbs?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type foodsCountOrderByAggregateInput = {
+  food_id?: Prisma.SortOrder
+  food_name?: Prisma.SortOrder
+  calories_per_serving?: Prisma.SortOrder
+  serving_size?: Prisma.SortOrder
+  protein?: Prisma.SortOrder
+  fat?: Prisma.SortOrder
+  carbs?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  image_url?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type foodsAvgOrderByAggregateInput = {
+  calories_per_serving?: Prisma.SortOrder
+  protein?: Prisma.SortOrder
+  fat?: Prisma.SortOrder
+  carbs?: Prisma.SortOrder
+}
+
+export type foodsMaxOrderByAggregateInput = {
+  food_id?: Prisma.SortOrder
+  food_name?: Prisma.SortOrder
+  calories_per_serving?: Prisma.SortOrder
+  serving_size?: Prisma.SortOrder
+  protein?: Prisma.SortOrder
+  fat?: Prisma.SortOrder
+  carbs?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  image_url?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type foodsMinOrderByAggregateInput = {
+  food_id?: Prisma.SortOrder
+  food_name?: Prisma.SortOrder
+  calories_per_serving?: Prisma.SortOrder
+  serving_size?: Prisma.SortOrder
+  protein?: Prisma.SortOrder
+  fat?: Prisma.SortOrder
+  carbs?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  image_url?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type foodsSumOrderByAggregateInput = {
+  calories_per_serving?: Prisma.SortOrder
+  protein?: Prisma.SortOrder
+  fat?: Prisma.SortOrder
+  carbs?: Prisma.SortOrder
 }
 
 export type FoodsScalarRelationFilter = {
@@ -329,36 +511,16 @@ export type FoodsScalarRelationFilter = {
   isNot?: Prisma.foodsWhereInput
 }
 
-export type foodsCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  food_name?: Prisma.SortOrder
-  calories?: Prisma.SortOrder
-  category?: Prisma.SortOrder
-  createat?: Prisma.SortOrder
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
-export type foodsAvgOrderByAggregateInput = {
-  calories?: Prisma.SortOrder
-}
-
-export type foodsMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  food_name?: Prisma.SortOrder
-  calories?: Prisma.SortOrder
-  category?: Prisma.SortOrder
-  createat?: Prisma.SortOrder
-}
-
-export type foodsMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  food_name?: Prisma.SortOrder
-  calories?: Prisma.SortOrder
-  category?: Prisma.SortOrder
-  createat?: Prisma.SortOrder
-}
-
-export type foodsSumOrderByAggregateInput = {
-  calories?: Prisma.SortOrder
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type foodsCreateNestedOneWithoutConsumed_foodsInput = {
@@ -375,28 +537,32 @@ export type foodsUpdateOneRequiredWithoutConsumed_foodsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.foodsUpdateToOneWithWhereWithoutConsumed_foodsInput, Prisma.foodsUpdateWithoutConsumed_foodsInput>, Prisma.foodsUncheckedUpdateWithoutConsumed_foodsInput>
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type foodsCreateWithoutConsumed_foodsInput = {
-  id: string
+  food_id?: string
   food_name: string
-  calories: number
-  category: string
-  createat?: Date | string | null
+  calories_per_serving: number
+  serving_size: string
+  protein?: number | null
+  fat?: number | null
+  carbs?: number | null
+  category?: string | null
+  image_url?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
 }
 
 export type foodsUncheckedCreateWithoutConsumed_foodsInput = {
-  id: string
+  food_id?: string
   food_name: string
-  calories: number
-  category: string
-  createat?: Date | string | null
+  calories_per_serving: number
+  serving_size: string
+  protein?: number | null
+  fat?: number | null
+  carbs?: number | null
+  category?: string | null
+  image_url?: string | null
+  created_at?: Date | string | null
+  updated_at?: Date | string | null
 }
 
 export type foodsCreateOrConnectWithoutConsumed_foodsInput = {
@@ -416,19 +582,31 @@ export type foodsUpdateToOneWithWhereWithoutConsumed_foodsInput = {
 }
 
 export type foodsUpdateWithoutConsumed_foodsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  food_id?: Prisma.StringFieldUpdateOperationsInput | string
   food_name?: Prisma.StringFieldUpdateOperationsInput | string
-  calories?: Prisma.IntFieldUpdateOperationsInput | number
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  calories_per_serving?: Prisma.IntFieldUpdateOperationsInput | number
+  serving_size?: Prisma.StringFieldUpdateOperationsInput | string
+  protein?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  fat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  carbs?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type foodsUncheckedUpdateWithoutConsumed_foodsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
+  food_id?: Prisma.StringFieldUpdateOperationsInput | string
   food_name?: Prisma.StringFieldUpdateOperationsInput | string
-  calories?: Prisma.IntFieldUpdateOperationsInput | number
-  category?: Prisma.StringFieldUpdateOperationsInput | string
-  createat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  calories_per_serving?: Prisma.IntFieldUpdateOperationsInput | number
+  serving_size?: Prisma.StringFieldUpdateOperationsInput | string
+  protein?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  fat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  carbs?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -463,40 +641,64 @@ export type FoodsCountOutputTypeCountConsumed_foodsArgs<ExtArgs extends runtime.
 
 
 export type foodsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  food_id?: boolean
   food_name?: boolean
-  calories?: boolean
+  calories_per_serving?: boolean
+  serving_size?: boolean
+  protein?: boolean
+  fat?: boolean
+  carbs?: boolean
   category?: boolean
-  createat?: boolean
+  image_url?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   consumed_foods?: boolean | Prisma.foods$consumed_foodsArgs<ExtArgs>
   _count?: boolean | Prisma.FoodsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["foods"]>
 
 export type foodsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  food_id?: boolean
   food_name?: boolean
-  calories?: boolean
+  calories_per_serving?: boolean
+  serving_size?: boolean
+  protein?: boolean
+  fat?: boolean
+  carbs?: boolean
   category?: boolean
-  createat?: boolean
+  image_url?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }, ExtArgs["result"]["foods"]>
 
 export type foodsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  id?: boolean
+  food_id?: boolean
   food_name?: boolean
-  calories?: boolean
+  calories_per_serving?: boolean
+  serving_size?: boolean
+  protein?: boolean
+  fat?: boolean
+  carbs?: boolean
   category?: boolean
-  createat?: boolean
+  image_url?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }, ExtArgs["result"]["foods"]>
 
 export type foodsSelectScalar = {
-  id?: boolean
+  food_id?: boolean
   food_name?: boolean
-  calories?: boolean
+  calories_per_serving?: boolean
+  serving_size?: boolean
+  protein?: boolean
+  fat?: boolean
+  carbs?: boolean
   category?: boolean
-  createat?: boolean
+  image_url?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type foodsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "food_name" | "calories" | "category" | "createat", ExtArgs["result"]["foods"]>
+export type foodsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"food_id" | "food_name" | "calories_per_serving" | "serving_size" | "protein" | "fat" | "carbs" | "category" | "image_url" | "created_at" | "updated_at", ExtArgs["result"]["foods"]>
 export type foodsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   consumed_foods?: boolean | Prisma.foods$consumed_foodsArgs<ExtArgs>
   _count?: boolean | Prisma.FoodsCountOutputTypeDefaultArgs<ExtArgs>
@@ -510,11 +712,17 @@ export type $foodsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     consumed_foods: Prisma.$consumed_foodsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: string
+    food_id: string
     food_name: string
-    calories: number
-    category: string
-    createat: Date | null
+    calories_per_serving: number
+    serving_size: string
+    protein: number | null
+    fat: number | null
+    carbs: number | null
+    category: string | null
+    image_url: string | null
+    created_at: Date | null
+    updated_at: Date | null
   }, ExtArgs["result"]["foods"]>
   composites: {}
 }
@@ -598,8 +806,8 @@ export interface foodsDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    * // Get first 10 Foods
    * const foods = await prisma.foods.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const foodsWithIdOnly = await prisma.foods.findMany({ select: { id: true } })
+   * // Only select the `food_id`
+   * const foodsWithFood_idOnly = await prisma.foods.findMany({ select: { food_id: true } })
    * 
    */
   findMany<T extends foodsFindManyArgs>(args?: Prisma.SelectSubset<T, foodsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$foodsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -643,9 +851,9 @@ export interface foodsDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    *   ]
    * })
    * 
-   * // Create many Foods and only return the `id`
-   * const foodsWithIdOnly = await prisma.foods.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Foods and only return the `food_id`
+   * const foodsWithFood_idOnly = await prisma.foods.createManyAndReturn({
+   *   select: { food_id: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -734,9 +942,9 @@ export interface foodsDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    *   ]
    * })
    * 
-   * // Update zero or more Foods and only return the `id`
-   * const foodsWithIdOnly = await prisma.foods.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Foods and only return the `food_id`
+   * const foodsWithFood_idOnly = await prisma.foods.updateManyAndReturn({
+   *   select: { food_id: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -939,11 +1147,17 @@ export interface Prisma__foodsClient<T, Null = never, ExtArgs extends runtime.Ty
  * Fields of the foods model
  */
 export interface foodsFieldRefs {
-  readonly id: Prisma.FieldRef<"foods", 'String'>
+  readonly food_id: Prisma.FieldRef<"foods", 'String'>
   readonly food_name: Prisma.FieldRef<"foods", 'String'>
-  readonly calories: Prisma.FieldRef<"foods", 'Int'>
+  readonly calories_per_serving: Prisma.FieldRef<"foods", 'Int'>
+  readonly serving_size: Prisma.FieldRef<"foods", 'String'>
+  readonly protein: Prisma.FieldRef<"foods", 'Float'>
+  readonly fat: Prisma.FieldRef<"foods", 'Float'>
+  readonly carbs: Prisma.FieldRef<"foods", 'Float'>
   readonly category: Prisma.FieldRef<"foods", 'String'>
-  readonly createat: Prisma.FieldRef<"foods", 'DateTime'>
+  readonly image_url: Prisma.FieldRef<"foods", 'String'>
+  readonly created_at: Prisma.FieldRef<"foods", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"foods", 'DateTime'>
 }
     
 

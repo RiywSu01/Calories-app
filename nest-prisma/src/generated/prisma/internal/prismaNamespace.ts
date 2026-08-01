@@ -384,10 +384,11 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  consumed_foods: 'consumed_foods',
-  daily_log: 'daily_log',
+  users: 'users',
+  user_profiles: 'user_profiles',
+  daily_logs: 'daily_logs',
   foods: 'foods',
-  users: 'users'
+  consumed_foods: 'consumed_foods'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -403,155 +404,229 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "consumed_foods" | "daily_log" | "foods" | "users"
+    modelProps: "users" | "user_profiles" | "daily_logs" | "foods" | "consumed_foods"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
-    consumed_foods: {
-      payload: Prisma.$consumed_foodsPayload<ExtArgs>
-      fields: Prisma.consumed_foodsFieldRefs
+    users: {
+      payload: Prisma.$usersPayload<ExtArgs>
+      fields: Prisma.usersFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.consumed_foodsFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload> | null
+          args: Prisma.usersFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.consumed_foodsFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
+          args: Prisma.usersFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
         }
         findFirst: {
-          args: Prisma.consumed_foodsFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload> | null
+          args: Prisma.usersFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.consumed_foodsFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
+          args: Prisma.usersFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
         }
         findMany: {
-          args: Prisma.consumed_foodsFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>[]
+          args: Prisma.usersFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>[]
         }
         create: {
-          args: Prisma.consumed_foodsCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
+          args: Prisma.usersCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
         }
         createMany: {
-          args: Prisma.consumed_foodsCreateManyArgs<ExtArgs>
+          args: Prisma.usersCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.consumed_foodsCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>[]
+          args: Prisma.usersCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>[]
         }
         delete: {
-          args: Prisma.consumed_foodsDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
+          args: Prisma.usersDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
         }
         update: {
-          args: Prisma.consumed_foodsUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
+          args: Prisma.usersUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
         }
         deleteMany: {
-          args: Prisma.consumed_foodsDeleteManyArgs<ExtArgs>
+          args: Prisma.usersDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.consumed_foodsUpdateManyArgs<ExtArgs>
+          args: Prisma.usersUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.consumed_foodsUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>[]
+          args: Prisma.usersUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>[]
         }
         upsert: {
-          args: Prisma.consumed_foodsUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
+          args: Prisma.usersUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
         }
         aggregate: {
-          args: Prisma.Consumed_foodsAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateConsumed_foods>
+          args: Prisma.UsersAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUsers>
         }
         groupBy: {
-          args: Prisma.consumed_foodsGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Consumed_foodsGroupByOutputType>[]
+          args: Prisma.usersGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UsersGroupByOutputType>[]
         }
         count: {
-          args: Prisma.consumed_foodsCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Consumed_foodsCountAggregateOutputType> | number
+          args: Prisma.usersCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UsersCountAggregateOutputType> | number
         }
       }
     }
-    daily_log: {
-      payload: Prisma.$daily_logPayload<ExtArgs>
-      fields: Prisma.daily_logFieldRefs
+    user_profiles: {
+      payload: Prisma.$user_profilesPayload<ExtArgs>
+      fields: Prisma.user_profilesFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.daily_logFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logPayload> | null
+          args: Prisma.user_profilesFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$user_profilesPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.daily_logFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logPayload>
+          args: Prisma.user_profilesFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$user_profilesPayload>
         }
         findFirst: {
-          args: Prisma.daily_logFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logPayload> | null
+          args: Prisma.user_profilesFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$user_profilesPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.daily_logFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logPayload>
+          args: Prisma.user_profilesFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$user_profilesPayload>
         }
         findMany: {
-          args: Prisma.daily_logFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logPayload>[]
+          args: Prisma.user_profilesFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$user_profilesPayload>[]
         }
         create: {
-          args: Prisma.daily_logCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logPayload>
+          args: Prisma.user_profilesCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$user_profilesPayload>
         }
         createMany: {
-          args: Prisma.daily_logCreateManyArgs<ExtArgs>
+          args: Prisma.user_profilesCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.daily_logCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logPayload>[]
+          args: Prisma.user_profilesCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$user_profilesPayload>[]
         }
         delete: {
-          args: Prisma.daily_logDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logPayload>
+          args: Prisma.user_profilesDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$user_profilesPayload>
         }
         update: {
-          args: Prisma.daily_logUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logPayload>
+          args: Prisma.user_profilesUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$user_profilesPayload>
         }
         deleteMany: {
-          args: Prisma.daily_logDeleteManyArgs<ExtArgs>
+          args: Prisma.user_profilesDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.daily_logUpdateManyArgs<ExtArgs>
+          args: Prisma.user_profilesUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.daily_logUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logPayload>[]
+          args: Prisma.user_profilesUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$user_profilesPayload>[]
         }
         upsert: {
-          args: Prisma.daily_logUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logPayload>
+          args: Prisma.user_profilesUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$user_profilesPayload>
         }
         aggregate: {
-          args: Prisma.Daily_logAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateDaily_log>
+          args: Prisma.User_profilesAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUser_profiles>
         }
         groupBy: {
-          args: Prisma.daily_logGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Daily_logGroupByOutputType>[]
+          args: Prisma.user_profilesGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.User_profilesGroupByOutputType>[]
         }
         count: {
-          args: Prisma.daily_logCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Daily_logCountAggregateOutputType> | number
+          args: Prisma.user_profilesCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.User_profilesCountAggregateOutputType> | number
+        }
+      }
+    }
+    daily_logs: {
+      payload: Prisma.$daily_logsPayload<ExtArgs>
+      fields: Prisma.daily_logsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.daily_logsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.daily_logsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logsPayload>
+        }
+        findFirst: {
+          args: Prisma.daily_logsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.daily_logsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logsPayload>
+        }
+        findMany: {
+          args: Prisma.daily_logsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logsPayload>[]
+        }
+        create: {
+          args: Prisma.daily_logsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logsPayload>
+        }
+        createMany: {
+          args: Prisma.daily_logsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.daily_logsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logsPayload>[]
+        }
+        delete: {
+          args: Prisma.daily_logsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logsPayload>
+        }
+        update: {
+          args: Prisma.daily_logsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logsPayload>
+        }
+        deleteMany: {
+          args: Prisma.daily_logsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.daily_logsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.daily_logsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logsPayload>[]
+        }
+        upsert: {
+          args: Prisma.daily_logsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$daily_logsPayload>
+        }
+        aggregate: {
+          args: Prisma.Daily_logsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDaily_logs>
+        }
+        groupBy: {
+          args: Prisma.daily_logsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Daily_logsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.daily_logsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Daily_logsCountAggregateOutputType> | number
         }
       }
     }
@@ -629,77 +704,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    users: {
-      payload: Prisma.$usersPayload<ExtArgs>
-      fields: Prisma.usersFieldRefs
+    consumed_foods: {
+      payload: Prisma.$consumed_foodsPayload<ExtArgs>
+      fields: Prisma.consumed_foodsFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.usersFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload> | null
+          args: Prisma.consumed_foodsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.usersFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
+          args: Prisma.consumed_foodsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
         }
         findFirst: {
-          args: Prisma.usersFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload> | null
+          args: Prisma.consumed_foodsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.usersFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
+          args: Prisma.consumed_foodsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
         }
         findMany: {
-          args: Prisma.usersFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>[]
+          args: Prisma.consumed_foodsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>[]
         }
         create: {
-          args: Prisma.usersCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
+          args: Prisma.consumed_foodsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
         }
         createMany: {
-          args: Prisma.usersCreateManyArgs<ExtArgs>
+          args: Prisma.consumed_foodsCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.usersCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>[]
+          args: Prisma.consumed_foodsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>[]
         }
         delete: {
-          args: Prisma.usersDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
+          args: Prisma.consumed_foodsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
         }
         update: {
-          args: Prisma.usersUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
+          args: Prisma.consumed_foodsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
         }
         deleteMany: {
-          args: Prisma.usersDeleteManyArgs<ExtArgs>
+          args: Prisma.consumed_foodsDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.usersUpdateManyArgs<ExtArgs>
+          args: Prisma.consumed_foodsUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.usersUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>[]
+          args: Prisma.consumed_foodsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>[]
         }
         upsert: {
-          args: Prisma.usersUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$usersPayload>
+          args: Prisma.consumed_foodsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$consumed_foodsPayload>
         }
         aggregate: {
-          args: Prisma.UsersAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateUsers>
+          args: Prisma.Consumed_foodsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConsumed_foods>
         }
         groupBy: {
-          args: Prisma.usersGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.UsersGroupByOutputType>[]
+          args: Prisma.consumed_foodsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Consumed_foodsGroupByOutputType>[]
         }
         count: {
-          args: Prisma.usersCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.UsersCountAggregateOutputType> | number
+          args: Prisma.consumed_foodsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Consumed_foodsCountAggregateOutputType> | number
         }
       }
     }
@@ -742,46 +817,83 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const Consumed_foodsScalarFieldEnum = {
-  id: 'id',
-  quantity: 'quantity',
-  food_id: 'food_id',
-  daily_log_id: 'daily_log_id',
-  createat: 'createat'
+export const UsersScalarFieldEnum = {
+  user_id: 'user_id',
+  email: 'email',
+  username: 'username',
+  role: 'role',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
-export type Consumed_foodsScalarFieldEnum = (typeof Consumed_foodsScalarFieldEnum)[keyof typeof Consumed_foodsScalarFieldEnum]
+export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
 
 
-export const Daily_logScalarFieldEnum = {
-  id: 'id',
+export const User_profilesScalarFieldEnum = {
+  user_id: 'user_id',
+  auth_provider: 'auth_provider',
+  height_cm: 'height_cm',
+  weight_kg: 'weight_kg',
+  date_of_birth: 'date_of_birth',
+  gender: 'gender',
+  target_calories: 'target_calories',
+  target_protein: 'target_protein',
+  target_fat: 'target_fat',
+  target_carbs: 'target_carbs',
+  activity_level: 'activity_level',
+  bmr: 'bmr',
+  tdee: 'tdee',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type User_profilesScalarFieldEnum = (typeof User_profilesScalarFieldEnum)[keyof typeof User_profilesScalarFieldEnum]
+
+
+export const Daily_logsScalarFieldEnum = {
+  daily_log_id: 'daily_log_id',
+  user_id: 'user_id',
   log_date: 'log_date',
   total_calories: 'total_calories',
-  user_id: 'user_id',
-  createat: 'createat'
+  total_protein: 'total_protein',
+  total_fat: 'total_fat',
+  total_carbs: 'total_carbs',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
-export type Daily_logScalarFieldEnum = (typeof Daily_logScalarFieldEnum)[keyof typeof Daily_logScalarFieldEnum]
+export type Daily_logsScalarFieldEnum = (typeof Daily_logsScalarFieldEnum)[keyof typeof Daily_logsScalarFieldEnum]
 
 
 export const FoodsScalarFieldEnum = {
-  id: 'id',
+  food_id: 'food_id',
   food_name: 'food_name',
-  calories: 'calories',
+  calories_per_serving: 'calories_per_serving',
+  serving_size: 'serving_size',
+  protein: 'protein',
+  fat: 'fat',
+  carbs: 'carbs',
   category: 'category',
-  createat: 'createat'
+  image_url: 'image_url',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type FoodsScalarFieldEnum = (typeof FoodsScalarFieldEnum)[keyof typeof FoodsScalarFieldEnum]
 
 
-export const UsersScalarFieldEnum = {
-  id: 'id',
-  username: 'username',
-  createat: 'createat'
+export const Consumed_foodsScalarFieldEnum = {
+  cf_id: 'cf_id',
+  daily_log_id: 'daily_log_id',
+  food_id: 'food_id',
+  amount: 'amount',
+  amount_type: 'amount_type',
+  meal_type: 'meal_type',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
-export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+export type Consumed_foodsScalarFieldEnum = (typeof Consumed_foodsScalarFieldEnum)[keyof typeof Consumed_foodsScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -829,16 +941,16 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
- * Reference to a field of type 'Decimal'
+ * Reference to a field of type 'user_role'
  */
-export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+export type Enumuser_roleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'user_role'>
     
 
 
 /**
- * Reference to a field of type 'Decimal[]'
+ * Reference to a field of type 'user_role[]'
  */
-export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+export type ListEnumuser_roleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'user_role[]'>
     
 
 
@@ -857,16 +969,16 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
- * Reference to a field of type 'Int'
+ * Reference to a field of type 'auth_provider_type'
  */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+export type Enumauth_provider_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'auth_provider_type'>
     
 
 
 /**
- * Reference to a field of type 'Int[]'
+ * Reference to a field of type 'auth_provider_type[]'
  */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+export type ListEnumauth_provider_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'auth_provider_type[]'>
     
 
 
@@ -881,6 +993,62 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'Float[]'
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
+ * Reference to a field of type 'gender_type'
+ */
+export type Enumgender_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'gender_type'>
+    
+
+
+/**
+ * Reference to a field of type 'gender_type[]'
+ */
+export type ListEnumgender_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'gender_type[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'activity_level_type'
+ */
+export type Enumactivity_level_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'activity_level_type'>
+    
+
+
+/**
+ * Reference to a field of type 'activity_level_type[]'
+ */
+export type ListEnumactivity_level_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'activity_level_type[]'>
+    
+
+
+/**
+ * Reference to a field of type 'amount_unit_type'
+ */
+export type Enumamount_unit_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'amount_unit_type'>
+    
+
+
+/**
+ * Reference to a field of type 'amount_unit_type[]'
+ */
+export type ListEnumamount_unit_typeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'amount_unit_type[]'>
     
 
 /**
@@ -993,10 +1161,11 @@ export type PrismaClientOptions = ({
   queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
-  consumed_foods?: Prisma.consumed_foodsOmit
-  daily_log?: Prisma.daily_logOmit
-  foods?: Prisma.foodsOmit
   users?: Prisma.usersOmit
+  user_profiles?: Prisma.user_profilesOmit
+  daily_logs?: Prisma.daily_logsOmit
+  foods?: Prisma.foodsOmit
+  consumed_foods?: Prisma.consumed_foodsOmit
 }
 
 /* Types for Logging */

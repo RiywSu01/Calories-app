@@ -51,10 +51,11 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  consumed_foods: 'consumed_foods',
-  daily_log: 'daily_log',
+  users: 'users',
+  user_profiles: 'user_profiles',
+  daily_logs: 'daily_logs',
   foods: 'foods',
-  users: 'users'
+  consumed_foods: 'consumed_foods'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -73,46 +74,83 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const Consumed_foodsScalarFieldEnum = {
-  id: 'id',
-  quantity: 'quantity',
-  food_id: 'food_id',
-  daily_log_id: 'daily_log_id',
-  createat: 'createat'
+export const UsersScalarFieldEnum = {
+  user_id: 'user_id',
+  email: 'email',
+  username: 'username',
+  role: 'role',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
-export type Consumed_foodsScalarFieldEnum = (typeof Consumed_foodsScalarFieldEnum)[keyof typeof Consumed_foodsScalarFieldEnum]
+export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
 
 
-export const Daily_logScalarFieldEnum = {
-  id: 'id',
+export const User_profilesScalarFieldEnum = {
+  user_id: 'user_id',
+  auth_provider: 'auth_provider',
+  height_cm: 'height_cm',
+  weight_kg: 'weight_kg',
+  date_of_birth: 'date_of_birth',
+  gender: 'gender',
+  target_calories: 'target_calories',
+  target_protein: 'target_protein',
+  target_fat: 'target_fat',
+  target_carbs: 'target_carbs',
+  activity_level: 'activity_level',
+  bmr: 'bmr',
+  tdee: 'tdee',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type User_profilesScalarFieldEnum = (typeof User_profilesScalarFieldEnum)[keyof typeof User_profilesScalarFieldEnum]
+
+
+export const Daily_logsScalarFieldEnum = {
+  daily_log_id: 'daily_log_id',
+  user_id: 'user_id',
   log_date: 'log_date',
   total_calories: 'total_calories',
-  user_id: 'user_id',
-  createat: 'createat'
+  total_protein: 'total_protein',
+  total_fat: 'total_fat',
+  total_carbs: 'total_carbs',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
-export type Daily_logScalarFieldEnum = (typeof Daily_logScalarFieldEnum)[keyof typeof Daily_logScalarFieldEnum]
+export type Daily_logsScalarFieldEnum = (typeof Daily_logsScalarFieldEnum)[keyof typeof Daily_logsScalarFieldEnum]
 
 
 export const FoodsScalarFieldEnum = {
-  id: 'id',
+  food_id: 'food_id',
   food_name: 'food_name',
-  calories: 'calories',
+  calories_per_serving: 'calories_per_serving',
+  serving_size: 'serving_size',
+  protein: 'protein',
+  fat: 'fat',
+  carbs: 'carbs',
   category: 'category',
-  createat: 'createat'
+  image_url: 'image_url',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type FoodsScalarFieldEnum = (typeof FoodsScalarFieldEnum)[keyof typeof FoodsScalarFieldEnum]
 
 
-export const UsersScalarFieldEnum = {
-  id: 'id',
-  username: 'username',
-  createat: 'createat'
+export const Consumed_foodsScalarFieldEnum = {
+  cf_id: 'cf_id',
+  daily_log_id: 'daily_log_id',
+  food_id: 'food_id',
+  amount: 'amount',
+  amount_type: 'amount_type',
+  meal_type: 'meal_type',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
-export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+export type Consumed_foodsScalarFieldEnum = (typeof Consumed_foodsScalarFieldEnum)[keyof typeof Consumed_foodsScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -8,38 +8,118 @@ datasource db {
   provider = "postgresql"
 }
 
-model consumed_foods {
-  id           String    @id @db.VarChar(255)
-  quantity     Decimal   @db.Decimal(10, 2)
-  food_id      String    @db.VarChar(255)
-  daily_log_id String    @db.VarChar(255)
-  createat     DateTime? @default(now()) @db.Timestamp(6)
-  daily_log    daily_log @relation(fields: [daily_log_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_daily_log")
-  foods        foods     @relation(fields: [food_id], references: [id], onUpdate: NoAction, map: "fk_food")
+// ==========================================
+// ENUMS
+// ==========================================
+
+enum user_role {
+  user
+  admin
 }
 
-model daily_log {
-  id             String           @id @db.VarChar(255)
-  log_date       DateTime         @db.Date
-  total_calories Int?             @default(0)
-  user_id        String           @db.VarChar(255)
-  createat       DateTime?        @default(now()) @db.Timestamp(6)
+enum activity_level_type {
+  sedentary
+  light
+  moderate
+  active
+  very_active @map("very active")
+}
+
+enum auth_provider_type {
+  Email
+  Google
+  Apple
+}
+
+enum gender_type {
+  male
+  female
+}
+
+enum amount_unit_type {
+  gram
+  oz
+}
+
+// ==========================================
+// MODELS
+// ==========================================
+
+model users {
+  user_id    String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email      String     @unique @db.VarChar(255)
+  username   String     @db.VarChar(100)
+  role       user_role? @default(user)
+  created_at DateTime?  @default(now()) @db.Timestamptz
+  updated_at DateTime?  @updatedAt @default(now()) @db.Timestamptz
+
+  user_profiles user_profiles?
+  daily_logs    daily_logs[]
+}
+
+model user_profiles {
+  user_id         String               @id @db.Uuid
+  auth_provider   auth_provider_type
+  height_cm       Float?
+  weight_kg       Float?
+  date_of_birth   DateTime?            @db.Date
+  gender          gender_type?
+  target_calories Int?
+  target_protein  Int?
+  target_fat      Int?
+  target_carbs    Int?
+  activity_level  activity_level_type?
+  bmr             Float?
+  tdee            Float?
+  created_at      DateTime?            @default(now()) @db.Timestamptz
+  updated_at      DateTime?            @updatedAt @default(now()) @db.Timestamptz
+
+  users users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+}
+
+model daily_logs {
+  daily_log_id   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id        String    @db.Uuid
+  log_date       DateTime  @db.Date
+  total_calories Int?
+  total_protein  Float?
+  total_fat      Float?
+  total_carbs    Float?
+  created_at     DateTime? @default(now()) @db.Timestamptz
+  updated_at     DateTime? @updatedAt @default(now()) @db.Timestamptz
+
+  users          users          @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   consumed_foods consumed_foods[]
-  users          users            @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_user")
+
+  @@unique([user_id, log_date], name: "uq_user_log_date")
 }
 
 model foods {
-  id             String           @id @db.VarChar(255)
-  food_name      String           @db.VarChar(255)
-  calories       Int
-  category       String           @db.VarChar(255)
-  createat       DateTime?        @default(now()) @db.Timestamp(6)
+  food_id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  food_name            String    @unique @db.VarChar(255)
+  calories_per_serving Int
+  serving_size         String    @db.VarChar(100)
+  protein              Float?
+  fat                  Float?
+  carbs                Float?
+  category             String?   @db.VarChar(100)
+  image_url            String?
+  created_at           DateTime? @default(now()) @db.Timestamptz
+  updated_at           DateTime? @updatedAt @default(now()) @db.Timestamptz
+
   consumed_foods consumed_foods[]
 }
 
-model users {
-  id        String      @id @db.VarChar(255)
-  username  String      @db.VarChar(255)
-  createat  DateTime?   @default(now()) @db.Timestamp(6)
-  daily_log daily_log[]
+model consumed_foods {
+  cf_id        String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  daily_log_id String           @db.Uuid
+  food_id      String           @db.Uuid
+  amount       Float
+  amount_type  amount_unit_type
+  meal_type    String?          @db.VarChar(50)
+  created_at   DateTime?        @default(now()) @db.Timestamptz
+  updated_at   DateTime?        @updatedAt @default(now()) @db.Timestamptz
+
+  daily_logs daily_logs @relation(fields: [daily_log_id], references: [daily_log_id], onDelete: Cascade)
+  foods      foods      @relation(fields: [food_id], references: [food_id], onDelete: Restrict)
 }
