@@ -68,7 +68,7 @@ Tables
 | TDEE | Float | Stored TDEE value for the user. | `1250.0` |
 | created_at | DateTime | Tracking the created date of each data in users table. | `2026-07-25 08:00:00` |
 | updated_at | DateTime | Tracking the updated date of each data in users table. | `2026-07-25 08:00:00` |
-1. users_credentials *(Stores user crendential informations and the physical metrics required for BMR/BMI calculations)*
+2. users_credentials *(Stores user crendential informations and the physical metrics required for BMR/BMI calculations)*
 
 | field | Data Type | Purpose | Example |
 | --- | --- | --- | --- |
@@ -81,7 +81,7 @@ Tables
 | created_at | DateTime | Tracking the created date of each data in users table. | `2026-07-25 08:00:00` |
 | updated_at | DateTime | Tracking the updated date of each data in users table. | `2026-07-25 08:00:00` |
 
-1. daily_logs *(The main container for a specific user on a specific calendar day)*
+3. daily_logs *(The main container for a specific user on a specific calendar day)*
 
 | field | Data Type | Purpose | Example |
 | --- | --- | --- | --- |
@@ -94,7 +94,7 @@ Tables
 | total_carbs | Float | Total carbs intake for the day. | `300.0` |
 | created_at | DateTime | Tracking the created date of each data in daily_logs table. | `2026-07-25 08:00:00` |
 | updated_at | DateTime | Tracking the updated date of each daily_logs table. | `2026-07-25 08:00:00` |
-1. foods  [NOW USED OWNS DATABASE]
+4. foods  [NOW USED OWNS DATABASE]
 - *OWNS DATABASE*
 
 | field | Data Type | Purpose | Example |
@@ -123,7 +123,7 @@ Tables
 | category | String | Category of the food. | `Supplement` |
 | created_at | DateTime | Tracking the created date of each foods. | `2026-07-24 18:00:00` |
 | updated_at | DateTime | Tracking the updated date of each data in foods table. | `2026-07-24 18:00:0` |
-1. consumed_foods *(The M:N Junction table connecting the food to the specific daily log)*
+5. consumed_foods *(The M:N Junction table connecting the food to the specific daily log)*
 
 | Field | Data Type | Purpose | Example |
 | --- | --- | --- | --- |
