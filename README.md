@@ -1,4 +1,4 @@
-# Calories-app
+# Calories-app (Currently under development)
 
 ## MVP features
 
