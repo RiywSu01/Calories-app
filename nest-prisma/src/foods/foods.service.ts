@@ -5,10 +5,10 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class FoodsService {
-  constructor(private readonly prisma: PrismaService) { }
-  
+  constructor(private readonly prisma: PrismaService) {}
+
   async create(createFoodDto: CreateFoodDto) {
-    const result = await this.prisma.foods.create({ data: createFoodDto });
+    const result = await this.prisma.food.create({ data: createFoodDto });
     if (!result) {
       throw new InternalServerErrorException('An error occurred while creating the food.');
     }
@@ -16,7 +16,7 @@ export class FoodsService {
   }
 
   async findAll() {
-    const result = await this.prisma.foods.findMany();
+    const result = await this.prisma.food.findMany();
     if (!result) {
       throw new NotFoundException('No foods found in the system.');
     }
@@ -24,7 +24,7 @@ export class FoodsService {
   }
 
   async findOne(id: string) {
-    const result = await this.prisma.foods.findUnique({ where: { food_id: id } });
+    const result = await this.prisma.food.findUnique({ where: { foodId: id } });
     if (!result) {
       throw new NotFoundException(`Food id:${id} not found.`);
     }
@@ -32,7 +32,7 @@ export class FoodsService {
   }
 
   async update(id: string, updateFoodDto: UpdateFoodDto) {
-    const result = await this.prisma.foods.update({ where: { food_id: id }, data: updateFoodDto });
+    const result = await this.prisma.food.update({ where: { foodId: id }, data: updateFoodDto });
     if (!result) {
       throw new NotFoundException(`Food id:${id} not found.`);
     }
@@ -40,7 +40,7 @@ export class FoodsService {
   }
 
   async remove(id: string) {
-    const result = await this.prisma.foods.delete({ where: { food_id: id } });
+    const result = await this.prisma.food.delete({ where: { foodId: id } });
     if (!result) {
       throw new NotFoundException(`Food id:${id} not found.`);
     }

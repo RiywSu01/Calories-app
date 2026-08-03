@@ -30,7 +30,7 @@ export * from "./enums.js"
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
  * // Fetch zero or more Users
- * const users = await prisma.users.findMany()
+ * const users = await prisma.user.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -40,27 +40,22 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model users
+ * Model User
  * 
  */
-export type users = Prisma.usersModel
+export type User = Prisma.UserModel
 /**
- * Model user_profiles
+ * Model UserProfile
  * 
  */
-export type user_profiles = Prisma.user_profilesModel
+export type UserProfile = Prisma.UserProfileModel
 /**
- * Model daily_logs
+ * Model Food
  * 
  */
-export type daily_logs = Prisma.daily_logsModel
+export type Food = Prisma.FoodModel
 /**
- * Model foods
+ * Model FoodLog
  * 
  */
-export type foods = Prisma.foodsModel
-/**
- * Model consumed_foods
- * 
- */
-export type consumed_foods = Prisma.consumed_foodsModel
+export type FoodLog = Prisma.FoodLogModel

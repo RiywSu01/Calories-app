@@ -9,15 +9,32 @@
 * 🟢 You can import this file directly.
 */
 
-export const user_role = {
+export const UserRole = {
   user: 'user',
   admin: 'admin'
 } as const
 
-export type user_role = (typeof user_role)[keyof typeof user_role]
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 
-export const activity_level_type = {
+export const AuthProviderType = {
+  Email: 'Email',
+  Google: 'Google',
+  Apple: 'Apple'
+} as const
+
+export type AuthProviderType = (typeof AuthProviderType)[keyof typeof AuthProviderType]
+
+
+export const GenderType = {
+  male: 'male',
+  female: 'female'
+} as const
+
+export type GenderType = (typeof GenderType)[keyof typeof GenderType]
+
+
+export const ActivityLevelType = {
   sedentary: 'sedentary',
   light: 'light',
   moderate: 'moderate',
@@ -25,29 +42,13 @@ export const activity_level_type = {
   very_active: 'very_active'
 } as const
 
-export type activity_level_type = (typeof activity_level_type)[keyof typeof activity_level_type]
+export type ActivityLevelType = (typeof ActivityLevelType)[keyof typeof ActivityLevelType]
 
 
-export const auth_provider_type = {
-  Email: 'Email',
-  Google: 'Google',
-  Apple: 'Apple'
+export const MealType = {
+  BREAKFAST: 'BREAKFAST',
+  LUNCH: 'LUNCH',
+  DINNER: 'DINNER'
 } as const
 
-export type auth_provider_type = (typeof auth_provider_type)[keyof typeof auth_provider_type]
-
-
-export const gender_type = {
-  male: 'male',
-  female: 'female'
-} as const
-
-export type gender_type = (typeof gender_type)[keyof typeof gender_type]
-
-
-export const amount_unit_type = {
-  gram: 'gram',
-  oz: 'oz'
-} as const
-
-export type amount_unit_type = (typeof amount_unit_type)[keyof typeof amount_unit_type]
+export type MealType = (typeof MealType)[keyof typeof MealType]

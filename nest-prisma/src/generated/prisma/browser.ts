@@ -18,27 +18,22 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
- * Model users
+ * Model User
  * 
  */
-export type users = Prisma.usersModel
+export type User = Prisma.UserModel
 /**
- * Model user_profiles
+ * Model UserProfile
  * 
  */
-export type user_profiles = Prisma.user_profilesModel
+export type UserProfile = Prisma.UserProfileModel
 /**
- * Model daily_logs
+ * Model Food
  * 
  */
-export type daily_logs = Prisma.daily_logsModel
+export type Food = Prisma.FoodModel
 /**
- * Model foods
+ * Model FoodLog
  * 
  */
-export type foods = Prisma.foodsModel
-/**
- * Model consumed_foods
- * 
- */
-export type consumed_foods = Prisma.consumed_foodsModel
+export type FoodLog = Prisma.FoodLogModel

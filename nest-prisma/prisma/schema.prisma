@@ -8,118 +8,133 @@ datasource db {
   provider = "postgresql"
 }
 
-// ==========================================
+// ==========================================================
 // ENUMS
-// ==========================================
+// ==========================================================
 
-enum user_role {
+enum UserRole {
   user
   admin
+
+  @@map("user_role")
 }
 
-enum activity_level_type {
+enum AuthProviderType {
+  Email
+  Google
+  Apple
+
+  @@map("auth_provider_type")
+}
+
+enum GenderType {
+  male
+  female
+
+  @@map("gender_type")
+}
+
+enum ActivityLevelType {
   sedentary
   light
   moderate
   active
   very_active @map("very active")
+
+  @@map("activity_level_type")
 }
 
-enum auth_provider_type {
-  Email
-  Google
-  Apple
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+
+  @@map("meal_type")
 }
 
-enum gender_type {
-  male
-  female
-}
-
-enum amount_unit_type {
-  gram
-  oz
-}
-
-// ==========================================
+// ==========================================================
 // MODELS
-// ==========================================
+// ==========================================================
 
-model users {
-  user_id    String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email      String     @unique @db.VarChar(255)
-  username   String     @db.VarChar(100)
-  role       user_role? @default(user)
-  created_at DateTime?  @default(now()) @db.Timestamptz
-  updated_at DateTime?  @updatedAt @default(now()) @db.Timestamptz
+model User {
+  userId    String   @id @default(dbgenerated("gen_random_uuid()")) @map("user_id") @db.Uuid
+  email     String   @unique @db.VarChar(255)
+  username  String   @db.VarChar(100)
+  role      UserRole @default(user)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
 
-  user_profiles user_profiles?
-  daily_logs    daily_logs[]
+  profile  UserProfile?
+  foodLogs FoodLog[]
+
+  @@index([email], map: "idx_users_email")
+  @@index([username], map: "idx_users_username")
+  @@map("users")
 }
 
-model user_profiles {
-  user_id         String               @id @db.Uuid
-  auth_provider   auth_provider_type
-  height_cm       Float?
-  weight_kg       Float?
-  date_of_birth   DateTime?            @db.Date
-  gender          gender_type?
-  target_calories Int?
-  target_protein  Int?
-  target_fat      Int?
-  target_carbs    Int?
-  activity_level  activity_level_type?
-  bmr             Float?
-  tdee            Float?
-  created_at      DateTime?            @default(now()) @db.Timestamptz
-  updated_at      DateTime?            @updatedAt @default(now()) @db.Timestamptz
+model UserProfile {
+  userId         String            @id @map("user_id") @db.Uuid
+  authProvider   AuthProviderType  @map("auth_provider")
+  heightCm       Float?            @map("height_cm")
+  weightKg       Float?            @map("weight_kg")
+  dateOfBirth    DateTime?         @map("date_of_birth") @db.Date
+  gender         GenderType?
+  targetCalories Int?              @map("target_calories")
+  targetProtein  Int?              @map("target_protein")
+  targetFat      Int?              @map("target_fat")
+  targetCarbs    Int?              @map("target_carbs")
+  activityLevel  ActivityLevelType? @map("activity_level")
+  bmr            Float?
+  tdee           Float?
+  createdAt      DateTime          @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt      DateTime          @updatedAt @map("updated_at") @db.Timestamptz
 
-  users users @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+  @@map("user_profiles")
 }
 
-model daily_logs {
-  daily_log_id   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user_id        String    @db.Uuid
-  log_date       DateTime  @db.Date
-  total_calories Int?
-  total_protein  Float?
-  total_fat      Float?
-  total_carbs    Float?
-  created_at     DateTime? @default(now()) @db.Timestamptz
-  updated_at     DateTime? @updatedAt @default(now()) @db.Timestamptz
+model Food {
+  foodId             String    @id @default(dbgenerated("gen_random_uuid()")) @map("food_id") @db.Uuid
+  foodName           String    @unique @map("food_name") @db.VarChar(255)
+  caloriesPerServing Int       @map("calories_per_serving")
+  servingSize        Float     @map("serving_size")
+  servingUnit        String    @map("serving_unit") @db.VarChar(50)
+  protein            Float
+  fat                Float
+  carbs              Float
+  category           String?   @db.VarChar(100)
+  imageUrl           String?   @map("image_url") @db.Text
+  createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
-  users          users          @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-  consumed_foods consumed_foods[]
+  foodLogs FoodLog[]
 
-  @@unique([user_id, log_date], name: "uq_user_log_date")
+  @@index([foodName], map: "idx_food_name")
+  @@index([category], map: "idx_food_category")
+  @@map("foods")
 }
 
-model foods {
-  food_id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  food_name            String    @unique @db.VarChar(255)
-  calories_per_serving Int
-  serving_size         String    @db.VarChar(100)
-  protein              Float?
-  fat                  Float?
-  carbs                Float?
-  category             String?   @db.VarChar(100)
-  image_url            String?
-  created_at           DateTime? @default(now()) @db.Timestamptz
-  updated_at           DateTime? @updatedAt @default(now()) @db.Timestamptz
+model FoodLog {
+  foodLogId     String   @id @default(dbgenerated("gen_random_uuid()")) @map("food_log_id") @db.Uuid
+  userId        String   @map("user_id") @db.Uuid
+  foodId        String   @map("food_id") @db.Uuid
+  quantity      Float
+  totalCalories Int?     @map("total_calories")
+  totalProtein  Float?   @map("total_protein")
+  totalFat      Float?   @map("total_fat")
+  totalCarbs    Float?   @map("total_carbs")
+  mealType      MealType @map("meal_type")
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt     DateTime @updatedAt @map("updated_at") @db.Timestamptz
 
-  consumed_foods consumed_foods[]
-}
+  user User @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  food Food @relation(fields: [foodId], references: [foodId], onDelete: Restrict)
 
-model consumed_foods {
-  cf_id        String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  daily_log_id String           @db.Uuid
-  food_id      String           @db.Uuid
-  amount       Float
-  amount_type  amount_unit_type
-  meal_type    String?          @db.VarChar(50)
-  created_at   DateTime?        @default(now()) @db.Timestamptz
-  updated_at   DateTime?        @updatedAt @default(now()) @db.Timestamptz
-
-  daily_logs daily_logs @relation(fields: [daily_log_id], references: [daily_log_id], onDelete: Cascade)
-  foods      foods      @relation(fields: [food_id], references: [food_id], onDelete: Restrict)
+  @@index([userId], map: "idx_food_logs_user")
+  @@index([foodId], map: "idx_food_logs_food")
+  @@index([mealType], map: "idx_food_logs_meal_type")
+  @@index([createdAt], map: "idx_food_logs_created_at")
+  @@index([userId, createdAt(sort: Desc)], map: "idx_food_logs_user_created")
+  @@map("food_logs")
 }
