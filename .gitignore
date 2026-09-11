@@ -1,0 +1,25 @@
+# ─── Environment Variables (Secret Keys) ───
+.env
+.env.*
+.env.docker
+*.local
+
+# Allow example templates to be committed
+!.env.example
+!.env.*.example
+!.env.docker.example
+
+# ─── Dependencies ───
+node_modules/
+*/node_modules/
+
+# ─── Build Artifacts ───
+dist/
+.next/
+out/
+build/
+
+# ─── System & Logs ───
+.DS_Store
+*.log
+npm-debug.log*

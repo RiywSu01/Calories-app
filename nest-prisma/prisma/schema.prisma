@@ -1,0 +1,154 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==========================================================
+// ENUMS
+// ==========================================================
+
+enum UserRole {
+  user
+  admin
+
+  @@map("user_role")
+}
+
+enum AuthProviderType {
+  Email
+  Google
+  Apple
+
+  @@map("auth_provider_type")
+}
+
+enum GenderType {
+  male
+  female
+
+  @@map("gender_type")
+}
+
+enum GoalModeType {
+  lose
+  maintain
+  gain
+
+  @@map("goal_mode_type")
+}
+
+enum ActivityLevelType {
+  sedentary
+  light
+  moderate
+  active
+  very_active @map("very active")
+
+  @@map("activity_level_type")
+}
+
+enum MealType {
+  BREAKFAST
+  LUNCH
+  DINNER
+
+  @@map("meal_type")
+}
+
+// ==========================================================
+// MODELS
+// ==========================================================
+
+model User {
+  userId    String   @id @map("user_id") @db.VarChar(255)
+  email     String   @unique @db.VarChar(255)
+  username  String   @db.VarChar(100)
+  role      UserRole @default(user)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  profile  UserProfile?
+  foodLogs FoodLog[]
+
+  @@index([email], map: "idx_users_email")
+  @@index([username], map: "idx_users_username")
+  @@map("users")
+}
+
+model UserProfile {
+  userId         String             @id @map("user_id") @db.VarChar(255)
+  authProvider   AuthProviderType   @map("auth_provider")
+  heightCm       Float?             @map("height_cm")
+  weightKg       Float?             @map("weight_kg")
+  dateOfBirth    DateTime?          @map("date_of_birth") @db.Date
+  gender         GenderType?
+  goalMode       GoalModeType?      @map("goal_mode")
+  targetCalories Int?               @map("target_calories")
+  targetProtein  Int?               @map("target_protein")
+  targetFat      Int?               @map("target_fat")
+  targetCarbs    Int?               @map("target_carbs")
+  activityLevel  ActivityLevelType? @map("activity_level")
+  bmr            Float?
+  tdee           Float?
+  bmi            Float?
+  bmiCategory    String?            @map("bmi_category") @db.VarChar(50)
+  createdAt      DateTime           @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt      DateTime           @updatedAt @map("updated_at") @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+  @@map("user_profiles")
+}
+
+model Food {
+  foodId             String    @id @default(dbgenerated("gen_random_uuid()")) @map("food_id") @db.Uuid
+  foodName           String    @unique @map("food_name") @db.VarChar(255)
+  caloriesPerServing Int       @map("calories_per_serving")
+  servingSize        Float     @map("serving_size")
+  servingUnit        String    @map("serving_unit") @db.VarChar(50)
+  protein            Float
+  fat                Float
+  carbs              Float
+  category           String?   @db.VarChar(100)
+  imageUrl           String?   @map("image_url") @db.Text
+  createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  foodLogs FoodLog[]
+
+  @@index([foodName], map: "idx_food_name")
+  @@index([category], map: "idx_food_category")
+  @@map("foods")
+}
+
+model FoodLog {
+  foodLogId          String    @id @default(dbgenerated("gen_random_uuid()")) @map("food_log_id") @db.Uuid
+  userId             String    @map("user_id") @db.VarChar(255)
+  foodId             String?   @map("food_id") @db.Uuid
+  fatsecretFoodId    String?   @map("fatsecret_food_id") @db.VarChar(100)
+  fatsecretServingId String?   @map("fatsecret_serving_id") @db.VarChar(100)
+  quantity           Float
+  totalCalories      Int?      @map("total_calories")
+  totalProtein       Float?    @map("total_protein")
+  totalFat           Float?    @map("total_fat")
+  totalCarbs         Float?    @map("total_carbs")
+  mealType           MealType  @map("meal_type")
+  createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  user User  @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  food Food? @relation(fields: [foodId], references: [foodId], onDelete: Restrict)
+
+  @@index([userId], map: "idx_food_logs_user")
+  @@index([foodId], map: "idx_food_logs_food")
+  @@index([fatsecretFoodId], map: "idx_food_logs_fatsecret")
+  @@index([mealType], map: "idx_food_logs_meal_type")
+  @@index([createdAt], map: "idx_food_logs_created_at")
+  @@index([userId, createdAt(sort: Desc)], map: "idx_food_logs_user_created")
+  @@map("food_logs")
+}

@@ -1,0 +1,50 @@
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { CreateFoodDto } from './dto/create-food.dto';
+import { UpdateFoodDto } from './dto/update-food.dto';
+import { PrismaService } from '../prisma/prisma.service';
+
+@Injectable()
+export class FoodsService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(createFoodDto: CreateFoodDto) {
+    const result = await this.prisma.food.create({ data: createFoodDto });
+    if (!result) {
+      throw new InternalServerErrorException('An error occurred while creating the food.');
+    }
+    return { message: 'New Food has been created successfully.', data: result };
+  }
+
+  async findAll() {
+    const result = await this.prisma.food.findMany();
+    const ItemsCount = await this.prisma.food.count();
+    if (!result) {
+      throw new NotFoundException('No foods found in the system.');
+    }
+    return { message: `All Food has been retrieved successfully, as ${ItemsCount} items.`, data: result };
+  }
+
+  async findOne(id: string) {
+    const result = await this.prisma.food.findUnique({ where: { foodId: id } });
+    if (!result) {
+      throw new NotFoundException(`Food id:${id} not found.`);
+    }
+    return { message: `Food id:${id} has been retrieved successfully.`, data: result };
+  }
+
+  async update(id: string, updateFoodDto: UpdateFoodDto) {
+    const result = await this.prisma.food.update({ where: { foodId: id }, data: updateFoodDto });
+    if (!result) {
+      throw new NotFoundException(`Food id:${id} not found.`);
+    }
+    return { message: `Food id:${id} updated successfully.`, data: result };
+  }
+
+  async remove(id: string) {
+    const result = await this.prisma.food.delete({ where: { foodId: id } });
+    if (!result) {
+      throw new NotFoundException(`Food id:${id} not found.`);
+    }
+    return { message: `Food id:${id} removed successfully.`, data: result };
+  }
+}

@@ -1,0 +1,88 @@
+services:
+  # ─── 1. PostgreSQL Database ───
+  db:
+    image: postgres:16-alpine
+    container_name: calpal-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-RiywSuPasS4252_}
+      POSTGRES_DB: ${POSTGRES_DB:-postgres}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-postgres}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - calpal-network
+
+  # ─── 2. NestJS Backend API ───
+  backend:
+    build:
+      context: ./nest-prisma
+      dockerfile: Dockerfile
+    container_name: calpal-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:RiywSuPasS4252_@db:5432/postgres}
+      PORT: ${BACKEND_PORT:-3001}
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      CLERK_WEBHOOK_SECRET: ${CLERK_WEBHOOK_SECRET}
+      FATSECRET_CLIENT_ID: ${FATSECRET_CLIENT_ID}
+      FATSECRET_CLIENT_SECRET: ${FATSECRET_CLIENT_SECRET}
+      GEMINI_KEY: ${GEMINI_KEY}
+    ports:
+      - "${BACKEND_PORT:-3001}:3001"
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:3001/health || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - calpal-network
+
+  # ─── 3. Next.js Frontend ───
+  frontend:
+    build:
+      context: ./my-app
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:-pk_test_b2JsaWdpbmctY29uZG9yLTc1LmNsZXJrLmFjY291bnRzLmRldiQ}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3001}
+        NEXT_PUBLIC_CLERK_SIGN_IN_URL: /sign-in
+        NEXT_PUBLIC_CLERK_SIGN_UP_URL: /sign-up
+        NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL: /profile-setup
+        NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL: /profile-setup
+    container_name: calpal-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      PORT: ${FRONTEND_PORT:-3000}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3001}
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    networks:
+      - calpal-network
+
+# ─── Persistent Volumes & Network ───
+volumes:
+  postgres_data:
+    name: calpal-postgres-data
+
+networks:
+  calpal-network:
+    name: calpal-network
+    driver: bridge
