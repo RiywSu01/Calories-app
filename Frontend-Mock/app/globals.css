@@ -1,0 +1,503 @@
+/* ── Google Font ── */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+/* ============================================================
+   CalPal — Design System
+   Minimal, Cute & High-Contrast with Full Dark Mode Support
+   ============================================================ */
+
+:root {
+  /* Brand Colors */
+  --mint: #7ECFB3;
+  --mint-light: #E6F7F1;
+  --mint-dark: #3F9A7C;
+  --peach: #FFB7A5;
+  --peach-light: #FFF0EC;
+  --lavender: #C4B5E0;
+  --lavender-light: #F4F0FA;
+
+  /* Macro Colors */
+  --macro-protein: #FF8FA3;
+  --macro-fat: #FFCA66;
+  --macro-carb: #79C2E8;
+
+  /* Light Theme Neutrals */
+  --bg-primary: #F8FAF9;
+  --bg-secondary: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-input: #F1F4F2;
+  --bg-meal-header: #2D2D2D;
+
+  --text-primary: #1A201E;
+  --text-secondary: #5A6963;
+  --text-tertiary: #8C9B95;
+  --text-on-dark: #FFFFFF;
+
+  --border: #E2E8E5;
+  --shadow: rgba(0, 0, 0, 0.05);
+  --shadow-md: rgba(0, 0, 0, 0.09);
+
+  --font-sans: 'Nunito', sans-serif;
+  --font-mono: var(--font-geist-mono);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+}
+
+/* ── Dark Mode Theme Tokens (WCAG AA Compliant) ── */
+[data-theme="dark"],
+.dark {
+  --bg-primary: #111413;
+  --bg-secondary: #181C1B;
+  --bg-card: #1E2321;
+  --bg-input: #262D2A;
+  --bg-meal-header: #262D2A;
+
+  --text-primary: #F4F7F5;
+  --text-secondary: #A6B4AF;
+  --text-tertiary: #6E7C77;
+
+  --border: #2D3733;
+  --shadow: rgba(0, 0, 0, 0.35);
+  --shadow-md: rgba(0, 0, 0, 0.55);
+
+  --mint: #7ECFB3;
+  --mint-light: #1E382E;
+  --mint-dark: #64C5A4;
+  --peach: #FFB7A5;
+  --peach-light: #3D2620;
+  --lavender: #C4B5E0;
+  --lavender-light: #2E253A;
+}
+
+@theme inline {
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card: var(--bg-card);
+  --color-bg-input: var(--bg-input);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-border: var(--border);
+  --color-mint: var(--mint);
+  --color-mint-light: var(--mint-light);
+  --color-mint-dark: var(--mint-dark);
+  --color-peach: var(--peach);
+  --color-peach-light: var(--peach-light);
+  --color-lavender: var(--lavender);
+  --color-lavender-light: var(--lavender-light);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/* ── Base Styles ── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Utility Classes ── */
+.page-container {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--bg-primary);
+}
+
+.page-padding {
+  padding: 20px;
+}
+
+/* ── Cards ── */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  box-shadow: 0 2px 12px var(--shadow);
+  border: 1px solid var(--border);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px var(--shadow-md);
+}
+
+.card-interactive {
+  cursor: pointer;
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+}
+
+.card-interactive:active {
+  transform: translateY(0);
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--mint);
+  color: #111413;
+}
+
+.btn-primary:hover {
+  background: var(--mint-dark);
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(126, 207, 179, 0.4);
+}
+
+.btn-secondary {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--border);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* ── Inputs ── */
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border);
+  background: var(--bg-input);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.input:focus {
+  border-color: var(--mint);
+  box-shadow: 0 0 0 3px rgba(126, 207, 179, 0.25);
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon .input {
+  padding-left: 42px;
+}
+
+.input-with-icon .input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+}
+
+/* ── Pill / Badge ── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pill-protein {
+  background: var(--macro-protein);
+  color: #4A121E;
+}
+
+.pill-fat {
+  background: var(--macro-fat);
+  color: #4A3508;
+}
+
+.pill-carb {
+  background: var(--macro-carb);
+  color: #0C364F;
+}
+
+[data-theme="dark"] .pill-protein,
+.dark .pill-protein {
+  background: rgba(255, 143, 163, 0.2);
+  color: #FFB5C2;
+  border: 1px solid rgba(255, 143, 163, 0.3);
+}
+
+[data-theme="dark"] .pill-fat,
+.dark .pill-fat {
+  background: rgba(255, 202, 102, 0.2);
+  color: #FFE0A3;
+  border: 1px solid rgba(255, 202, 102, 0.3);
+}
+
+[data-theme="dark"] .pill-carb,
+.dark .pill-carb {
+  background: rgba(121, 194, 232, 0.2);
+  color: #A8D8EA;
+  border: 1px solid rgba(121, 194, 232, 0.3);
+}
+
+/* ── Floating Action Button ── */
+.fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--mint);
+  color: #111413;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(126, 207, 179, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 100;
+}
+
+.fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(126, 207, 179, 0.6);
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.4s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.25s ease-out;
+}
+
+/* ── Calendar & Date Transition Animations ── */
+@keyframes calendarSlideFromRight {
+  0% {
+    opacity: 0.3;
+    transform: translateX(20px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes calendarSlideFromLeft {
+  0% {
+    opacity: 0.3;
+    transform: translateX(-20px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes calendarPop {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
+  60% {
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes selectedPop {
+  0% {
+    transform: scale(0.82) translateY(5px);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.18) translateY(-5px);
+    box-shadow: 0 16px 32px -4px rgba(16, 185, 129, 0.38);
+  }
+  75% {
+    transform: scale(1.07) translateY(-1px);
+  }
+  100% {
+    transform: scale(1.12) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes datePopUp {
+  0% {
+    transform: scale(0.82) translateY(6px);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.18) translateY(-6px);
+    box-shadow: 0 16px 32px -4px rgba(16, 185, 129, 0.38);
+  }
+  75% {
+    transform: scale(1.07) translateY(-1px);
+  }
+  100% {
+    transform: scale(1.12) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes dateStripSwitch {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.96) translateY(2px);
+  }
+  60% {
+    transform: scale(1.02) translateY(-1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-slideFromRight {
+  animation: calendarSlideFromRight 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slideFromLeft {
+  animation: calendarSlideFromLeft 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-calendarPop {
+  animation: calendarPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-selectedPop {
+  animation: selectedPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.animate-popUp {
+  animation: datePopUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.animate-stripSwitch {
+  animation: dateStripSwitch 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--mint-light);
+  color: var(--text-primary);
+}
