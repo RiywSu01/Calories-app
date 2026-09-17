@@ -58,8 +58,17 @@ Import `calpal-frontend-mock` in Vercel with Root Directory `./`.
 
 ---
 
-## 🔒 Update Clerk Allowed Origins
-Once deployed on Vercel:
-1. Open [Clerk Dashboard](https://dashboard.clerk.com).
-2. Go to **Configure** → **Domains** / **Paths**.
-3. Add your Vercel URL (e.g. `https://calpal-mock-xxx.vercel.app`) to allowed redirect origins.
+## 🔒 Clerk Domain & Authentication Setup
+
+### 1. Development Mode (`pk_test_...`) — No Setup Required 🎉
+- When using Clerk test keys (`pk_test_...`), Clerk **automatically allows all `*.vercel.app` domains** out of the box.
+- You do **not** need to add or verify your `https://calpal-app-xxx.vercel.app` domain in the Clerk Dashboard under **Domains**.
+- Both Email login and Google SSO will work immediately on your Vercel preview/production URL.
+
+### 2. Production Mode (`pk_live_...` / Custom Domains)
+- If you switch to production by clicking **"Go to prod"** in the Clerk Dashboard or use a custom domain (e.g., `www.calpal.com`):
+  1. Open [Clerk Dashboard](https://dashboard.clerk.com).
+  2. Navigate to **Configure** → **Domains**.
+  3. Add your custom production domain and configure the required DNS records (CNAME/TXT) provided by Clerk.
+  4. Replace your Vercel Environment Variables with your production keys (`pk_live_...` and `sk_live_...`).
+
